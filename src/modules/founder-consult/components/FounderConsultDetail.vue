@@ -32,6 +32,7 @@
           hideFooter
         ></TableWithTitle> -->
         <SpaceInfoCard
+          :loading="loading"
           title="신청공간 정보"
           :founderConsultDto="founderConsultDto"
           @click="spaceTypeDetailDialog = true"
