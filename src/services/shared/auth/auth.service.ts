@@ -5,6 +5,8 @@ import {
   BaseUser,
   CheckSMSCodeDto,
   RegisterSMSCodeDto,
+  ChangePasswordDto,
+  ChangePasswordReturnDto,
 } from './dto';
 import { Observable } from 'rxjs';
 import { Pagination } from '@/common/interfaces/pagination.type';
@@ -39,6 +41,15 @@ class AuthService extends BaseService {
   }
   checkSMSCode(checkSMSCodeDto: CheckSMSCodeDto) {
     return this.post('check-sms-code', checkSMSCodeDto);
+  }
+  validatePassword(changePasswordDto: ChangePasswordDto) {
+    return this.post<ChangePasswordReturnDto>(
+      'auth/company-user/validate-password',
+      changePasswordDto,
+    );
+  }
+  updatePassword(changePasswordDto: ChangePasswordDto) {
+    return this.post('auth/company-user/update-password', changePasswordDto);
   }
 }
 
