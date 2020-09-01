@@ -13,7 +13,7 @@
             >
           </li>
         </div>
-      </nav> -->
+      </nav>-->
 
       <component :is="layout"></component>
     </v-app>
@@ -39,12 +39,12 @@ export default class extends Vue {
 <style lang="scss">
 // overrides
 #app {
-  .v-btn.v-size--default,
-  .v-btn.v-size--large {
-    &:not(.v-btn--icon):not(.v-btn--fab) {
-      // padding: 0 30px !important;
-    }
-  }
+  // .v-btn.v-size--default,
+  // .v-btn.v-size--large {
+  //   &:not(.v-btn--icon):not(.v-btn--fab) {
+  //     // padding: 0 30px !important;
+  //   }
+  // }
 
   .theme--light.v-list-item .v-list-item__action-text,
   .theme--light.v-list-item .v-list-item__subtitle {

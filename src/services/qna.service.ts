@@ -10,41 +10,41 @@ class QNAService extends BaseService {
    * @param pagination
    */
   findAll(filter?, pagination?: Pagination) {
-    return this.paginate<QNADto>('inquiry', filter, pagination);
+    return super.paginate<QNADto>('inquiry', filter, pagination);
   }
   /**
    * detail
    * @param id
    */
   findOne(id: number | string) {
-    return this.get<QNADto>(`inquiry/${id}`);
+    return super.get<QNADto>(`inquiry/${id}`);
   }
   /**
    * list
    * @param pagination
    */
   findAllReply(id: number | string, pagination?: Pagination) {
-    return this.paginate<QNAReplyDto>(
+    return super.paginate<QNAReplyDto>(
       `inquiry/${id}/reply`,
       { orderByNo: ORDER_BY_VALUE.DESC },
       pagination,
     );
   }
   create(value: QNACreateDto) {
-    return this.post<QNACreateDto>('inquiry', value);
+    return super.post<QNACreateDto>('inquiry', value);
   }
   createReply(id: number | string, value: QNAReplyCreateDto) {
-    return this.post<QNAReplyCreateDto>(`inquiry/${id}/reply`, value);
+    return super.post<QNAReplyCreateDto>(`inquiry/${id}/reply`, value);
   }
   getReply(id: number | string, replyId: number | string) {
-    return this.get<QNAReplyDto>(`inquiry/${id}/reply/${replyId}`);
+    return super.get<QNAReplyDto>(`inquiry/${id}/reply/${replyId}`);
   }
   changeReply(
     id: number | string,
     replyId: number | string,
     value: QNAReplyCreateDto,
   ) {
-    return this.patch<QNAReplyCreateDto>(
+    return super.patch<QNAReplyCreateDto>(
       `inquiry/${id}/reply/${replyId}`,
       value,
     );
