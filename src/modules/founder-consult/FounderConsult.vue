@@ -3,8 +3,8 @@
     <!-- <FounderConsultConfirmDialog
       :dialog.sync="confirmDialog"
       @agree="$router.push(`/founder-consult/${clickedRowNo}`)"
-    ></FounderConsultConfirmDialog> -->
-    <v-card class="p-3 px-lg-8 py-lg-6 mb-4 rounded ">
+    ></FounderConsultConfirmDialog>-->
+    <v-card class="p-3 px-lg-8 py-lg-6 mb-4 rounded">
       <v-row>
         <v-col cols="6" lg="3">
           <v-select
@@ -35,7 +35,7 @@
             dense
           >
           </v-select>
-        </v-col> -->
+        </v-col>-->
         <v-col cols="6" lg="3">
           <v-select
             v-if="founderConsultStatusSelect"
@@ -82,16 +82,10 @@
       </v-row>
       <v-row>
         <v-col cols="6" lg="3">
-          <DateField
-            title="시작일(열람일 기준)"
-            :date.sync="founderConsultSearchDto.startDate"
-          ></DateField>
+          <DateField title="시작일(열람일 기준)" :date.sync="founderConsultSearchDto.startDate"></DateField>
         </v-col>
         <v-col cols="6" lg="3">
-          <DateField
-            title="종료일(열람일 기준)"
-            :date.sync="founderConsultSearchDto.endDate"
-          ></DateField>
+          <DateField title="종료일(열람일 기준)" :date.sync="founderConsultSearchDto.endDate"></DateField>
         </v-col>
         <v-col cols="12" lg="6">
           <v-text-field
@@ -124,8 +118,7 @@
         :listCount="founderConsultListCount"
         @rowClicked="toSelectedItemPage"
         @paginationChanged="getList()"
-      >
-      </CommonTable>
+      ></CommonTable>
     </v-card>
   </div>
 </template>

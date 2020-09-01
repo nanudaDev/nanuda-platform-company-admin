@@ -14,7 +14,7 @@ class companyDistrictService extends BaseService {
     super();
   }
   findOne(id: number | string) {
-    return this.get<CompanyDistrictDto>(`company-district/${id}`);
+    return super.get<CompanyDistrictDto>(`company-district/${id}`);
   }
   /**
    * list
@@ -22,36 +22,41 @@ class companyDistrictService extends BaseService {
    * @param pagination
    */
   findAll(filter?: CompanyDistrictSearchDto, pagination?: Pagination) {
-    return this.paginate<CompanyDistrictDto>(
+    return super.paginate<CompanyDistrictDto>(
       'company-district',
       filter,
       pagination,
     );
   }
+
   findDistrictSpaceTypeList(
     spaceTypeSearchDto: SpaceTypeSearchDto,
     pagination?: Pagination,
   ) {
-    return this.paginate<SpaceTypeDto>(
+    return super.paginate<SpaceTypeDto>(
       'delivery-space',
       spaceTypeSearchDto,
       pagination,
     );
   }
   findDistrictSpaceType(id: number) {
-    return this.get<SpaceTypeDto>(`delivery-space/${id}`);
+    return super.get<SpaceTypeDto>(`delivery-space/${id}`);
   }
-  patchDistrictSpaceType(id: number, spaceTypePatchDto: SpaceTypePatchDto) {
+
+  patchDistrictSpaceType(
+    id: number | string,
+    spaceTypePatchDto: SpaceTypePatchDto,
+  ) {
     return this.patch<SpaceTypePatchDto>(
       `delivery-space/${id}`,
       spaceTypePatchDto,
     );
   }
   createDistrictSpaceType(spaceTypeCreateDto: SpaceTypeCreateDto) {
-    return this.post<SpaceTypeDto>('delivery-space', spaceTypeCreateDto);
+    return super.post<SpaceTypeDto>('delivery-space', spaceTypeCreateDto);
   }
   findDistrictSelectList() {
-    return this.get<CompanyDistrictDto[]>('company-district/select-option');
+    return super.get<CompanyDistrictDto[]>('company-district/select-option');
   }
 }
 export default new companyDistrictService();

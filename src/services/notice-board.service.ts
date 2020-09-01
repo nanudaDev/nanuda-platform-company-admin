@@ -12,14 +12,14 @@ class noticeBoardService extends BaseService {
    * @param pagination
    */
   findAll(filter: NoticeBoardSearchDto, pagination?: Pagination) {
-    return this.paginate<NoticeBoardDto>('notice-board', filter, pagination);
+    return super.paginate<NoticeBoardDto>('notice-board', filter, pagination);
   }
   /**
    * detail
    * @param id
    */
-  findOne(id) {
-    return this.get<NoticeBoardDto>(`notice-board/${id}`);
+  findOne(id: number | string) {
+    return super.get<NoticeBoardDto>(`notice-board/${id}`);
   }
 }
 export default new noticeBoardService();

@@ -10,10 +10,10 @@ class contractService extends BaseService {
       pagination,
     );
   }
-  findOne(id: string | number) {
+  findOne(id: number | string) {
     return this.get<ContractDto>(`delivery-founder-consult-contract/${id}`);
   }
-  deleteOne(id: string) {
+  deleteOne(id: number | string) {
     return this.delete<ContractDto>(`delivery-founder-consult-contract/${id}`);
   }
 }
