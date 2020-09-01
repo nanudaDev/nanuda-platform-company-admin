@@ -1,6 +1,9 @@
 <template>
   <div v-if="companyUserDto">
     <InfoChangeDialog :dialog.sync="infoChangeDialog"></InfoChangeDialog>
+    <PasswordChangeDialog
+      :dialog.sync="passwordChangeDialog"
+    ></PasswordChangeDialog>
     <CardWithTitle title="내 정보">
       <template v-slot:top>
         <v-btn
@@ -33,6 +36,11 @@
           </li>
         </ul>
       </v-card-text>
+      <v-btn
+        class="primary"
+        @click="passwordChangeDialog = !passwordChangeDialog"
+        >비밀번호 변경</v-btn
+      >
     </CardWithTitle>
   </div>
 </template>
@@ -44,6 +52,7 @@ import { CompanyUserDto } from '@/dto/company-user/company-user.dto';
 import companyUserService from '@/services/company-user.service';
 import CardWithTitle from '@/modules/_common/components/CardWithTitle.vue';
 import InfoChangeDialog from '@/modules/my-page/components/InfoChangeDialog.vue';
+import PasswordChangeDialog from '@/modules/my-page/components/PasswordChangeDialog.vue';
 import { BaseUser } from '@/services/shared/auth';
 import { COMPANY_USER, CONST_COMPANY_USER } from '@/services/shared';
 
@@ -51,11 +60,12 @@ import { getColor } from '@/modules/_common/utils/getColor';
 
 @Component({
   name: 'MyPage',
-  components: { CardWithTitle, InfoChangeDialog },
+  components: { CardWithTitle, InfoChangeDialog, PasswordChangeDialog },
 })
 export default class Mypage extends BaseComponent {
   private companyUserDto = new CompanyUserDto(BaseUser);
   private infoChangeDialog = false;
+  private passwordChangeDialog = false;
   private companyUserAdminRole: COMPANY_USER[] = [...CONST_COMPANY_USER];
 
   getColor(status) {
