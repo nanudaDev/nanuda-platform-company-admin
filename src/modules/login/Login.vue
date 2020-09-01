@@ -5,18 +5,12 @@
         <v-col cols="12" sm="8" md="6" lg="4">
           <v-card class="elevation-12">
             <v-toolbar color="orange" dark flat>
-              <v-toolbar-title
-                class="black--text title text-h5 font-weight-bold"
-                >NND</v-toolbar-title
-              >
+              <v-toolbar-title class="black--text title text-h5 font-weight-bold">NND</v-toolbar-title>
               <v-spacer></v-spacer>
             </v-toolbar>
             <v-card-text class="py-5 px-5">
               <div class="form-wrap">
-                <div
-                  v-if="!codeCorrect"
-                  class="form-row no-gutters align-items-center"
-                >
+                <div v-if="!codeCorrect" class="form-row no-gutters align-items-center">
                   <div class="input-field">
                     <v-text-field
                       outlined
@@ -39,16 +33,14 @@
                       :disabled="isGetCodeBtnDisabled"
                       style="max-width:100%"
                       :loading="phoneNoLoading"
-                      >{{
-                        isGetCodeBtnDisabled ? time : '인증번호 받기'
-                      }}</v-btn
                     >
+                      {{
+                      isGetCodeBtnDisabled ? time : '인증번호 받기'
+                      }}
+                    </v-btn>
                   </div>
                 </div>
-                <div
-                  v-if="codeSent && !codeCorrect"
-                  class="form-row no-gutters align-items-center"
-                >
+                <div v-if="codeSent && !codeCorrect" class="form-row no-gutters align-items-center">
                   <div class="input-field">
                     <v-text-field
                       outlined
@@ -70,14 +62,10 @@
                       @click="checkSMSCode()"
                       style="max-width:100%"
                       :loading="authNoLoading"
-                      >인증번호 확인</v-btn
-                    >
+                    >인증번호 확인</v-btn>
                   </div>
                 </div>
-                <div
-                  class="form-row no-gutters align-items-center"
-                  v-if="codeCorrect"
-                >
+                <div class="form-row no-gutters align-items-center" v-if="codeCorrect">
                   <div class="input-field">
                     <v-text-field
                       outlined
@@ -94,12 +82,7 @@
                     ></v-text-field>
                   </div>
                   <div class="btn-wrap">
-                    <v-btn
-                      color="primary"
-                      @click="signIn()"
-                      :loading="passwordLoading"
-                      >로그인</v-btn
-                    >
+                    <v-btn color="primary" @click="signIn()" :loading="passwordLoading">로그인</v-btn>
                   </div>
                 </div>
               </div>
@@ -109,9 +92,9 @@
               <!-- <v-btn color="primary" @click="getSMSCode">인증번호 받기</v-btn> -->
             </v-card-actions>
           </v-card>
-          <p class="mt-5 small text-center">
-            © 2020 The Great Trading Company, Ltd. All Rights Reserved.
-          </p>
+          <p
+            class="mt-5 small text-center"
+          >© 2020 The Great Trading Company, Ltd. All Rights Reserved.</p>
         </v-col>
       </v-row>
     </v-container>
@@ -146,6 +129,11 @@ export default class Login extends BaseComponent {
     this.checkSMSCodeDto = new CheckSMSCodeDto();
     this.registerSMSCodeDto = new RegisterSMSCodeDto();
   }
+  public $refs: {
+    authNoInput: HTMLElement;
+    passwordInput: HTMLElement;
+    phoneNoInput: HTMLElement;
+  };
   @Watch('registerSMSCodeDto', { deep: true })
   registerDtoChanged() {
     this.checkSMSCodeDto.phone = this.registerSMSCodeDto.phone;
