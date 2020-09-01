@@ -33,22 +33,7 @@
         ></TableWithTitle> -->
         <SpaceInfoCard
           title="신청공간 정보"
-          :districtName="
-            founderConsultDto.deliverySpaces.companyDistrict.nameKr
-          "
-          :typeName="founderConsultDto.deliverySpaces.typeName"
-          :deposit="founderConsultDto.deliverySpaces.deposit"
-          :size="founderConsultDto.deliverySpaces.size"
-          :monthlyRentFee="founderConsultDto.deliverySpaces.monthlyRentFee"
-          :monthlyUtilityFee="
-            founderConsultDto.deliverySpaces.monthlyUtilityFee
-          "
-          :quantity="founderConsultDto.deliverySpaces.quantity"
-          :lengthOfContracts="
-            founderConsultDto.deliverySpaces.contracts
-              ? founderConsultDto.deliverySpaces.contracts.length
-              : null
-          "
+          :founderConsultDto="founderConsultDto"
           @click="spaceTypeDetailDialog = true"
         ></SpaceInfoCard>
       </v-col>

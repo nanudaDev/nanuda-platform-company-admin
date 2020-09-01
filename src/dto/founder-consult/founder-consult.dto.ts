@@ -5,9 +5,11 @@ import {
 } from '@/services/shared/common-code.type';
 import { AVAILABLE_TIME, ORDER_BY_VALUE, YN } from '@/common/interfaces';
 import { CodeManagementDto } from '@/services/init/dto';
+import { SpaceTypeDto } from '../company-district';
 
 export class FounderConsultDto extends BaseDto<FounderConsultDto> {
   deliverySpaceNo: number;
+  deliverySpaces: SpaceTypeDto;
   status: FOUNDER_CONSULT;
   hopeTime?: AVAILABLE_TIME;
   purposeYn: YN;

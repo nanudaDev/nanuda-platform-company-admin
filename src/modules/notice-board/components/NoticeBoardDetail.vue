@@ -65,11 +65,9 @@ export default class NoticeBoardDetail extends BaseComponent {
     link.click();
   }
   downloadWithVueResource(filePath, fileName) {
-    this.$http({
-      method: 'get',
-      url: filePath,
-    }).then(response => {
-      this.forceFileDownload(response, fileName);
+    this.$http.get(filePath, { responseType: 'arraybuffer' }).then(res => {
+      console.log('res', res);
+      this.forceFileDownload(res, fileName);
     });
   }
   created() {
