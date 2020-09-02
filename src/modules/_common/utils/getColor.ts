@@ -18,6 +18,10 @@ export const getColor = (status: string): string => {
       return 'lime lighten-1';
     case 'F_DIST_COMPLETE':
       return 'orange lighten-1';
+    case 'FOUNDER_CONSULT':
+      return 'orange lighten-2';
+    case 'SYSTEM':
+      return 'blue lighten-2';
     default:
       return 'grey lighten-1';
   }

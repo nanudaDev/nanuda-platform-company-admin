@@ -1,23 +1,25 @@
 <template>
   <div>
     <CardWithTitle title="유저 정보">
-      <ul>
-        <li>핸드폰번호: {{ companyUserDto.phone }}</li>
-        <li>이름: {{ companyUserDto.name }}</li>
-        <li>이메일: {{ companyUserDto.email }}</li>
-        <li v-if="companyUserDto.codeManagement">
-          상태: {{ companyUserDto.codeManagement.value }}
-        </li>
-        <li>
-          권한:
-          <v-icon
-            class="orange--text caption"
-            v-if="companyUserDto.authCode == companyUserAdminRole[0]"
-            >mdi-crown</v-icon
-          >
-          <span>{{ companyUserDto.authCode | enumTransformer }}</span>
-        </li>
-      </ul>
+      <v-card-text>
+        <ul class="u-list">
+          <li>핸드폰번호: {{ companyUserDto.phone }}</li>
+          <li>이름: {{ companyUserDto.name }}</li>
+          <li>이메일: {{ companyUserDto.email }}</li>
+          <li v-if="companyUserDto.codeManagement">
+            상태: {{ companyUserDto.codeManagement.value }}
+          </li>
+          <li>
+            권한:
+            <v-icon
+              class="orange--text caption"
+              v-if="companyUserDto.authCode == companyUserAdminRole[0]"
+              >mdi-crown</v-icon
+            >
+            <span>{{ companyUserDto.authCode | enumTransformer }}</span>
+          </li>
+        </ul>
+      </v-card-text>
     </CardWithTitle>
   </div>
 </template>

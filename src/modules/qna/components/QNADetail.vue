@@ -7,7 +7,7 @@
       :replyNo="selectedReply.no"
       @changed="getReply()"
     ></ReplyChangeDialog>
-    <v-card class="pa-5">
+    <v-card class="pa-5" flat>
       <div class="text-center ma-5">
         <v-progress-circular
           v-if="QNAContentLoading"
@@ -20,31 +20,23 @@
         </v-progress-circular>
       </div>
       <div v-if="!QNAContentLoading">
-        <v-card-title>{{ QNADto.title }}</v-card-title>
-        <v-row>
-          <v-col>
-            <v-card-subtitle
-              >작성자: {{ QNADto.companyUser.name }}</v-card-subtitle
-            >
-          </v-col>
-          <v-col>
-            <v-card-subtitle
-              >작성일:
-              {{
-                $moment(QNADto.createdAt).format('YYYY.MM.DD - h:mm a')
-              }}</v-card-subtitle
-            >
-          </v-col>
-        </v-row>
-        <v-card-text>{{ QNADto.content }}</v-card-text>
+        <h4>{{ QNADto.title }}</h4>
+        <div class="text-right">
+          <span class="caption">{{ QNADto.companyUser.name }}</span>
+          <span class="caption mx-2">|</span>
+          <span class="caption">
+            {{ $moment(QNADto.createdAt).format('YYYY.MM.DD - h:mm a') }}</span
+          >
+        </div>
+        <div>{{ QNADto.content }}</div>
       </div>
     </v-card>
-    <v-row justify="center">
+    <v-row no-gutters justify="center">
       <v-btn
         @click="pagination.limit += 20"
         class="ma-5 primary"
         v-if="replyCount > pagination.limit"
-        >더보기</v-btn
+        >이전 내용 더보기</v-btn
       >
     </v-row>
     <div class="text-center ma-5">
@@ -59,79 +51,86 @@
       </v-progress-circular>
     </div>
     <div v-for="reply in replyList" :key="reply.no">
-      <!-- ******************업체 유저 코멘트****************************** -->
-      <v-row v-if="reply.companyUser">
-        <v-col cols="12">
-          <v-row justify="end" align="end">
-            <v-col>
-              <v-row
-                justify="end"
-                v-if="store.state.myName === reply.companyUser.name"
-              >
-                <v-btn
-                  color="primary"
-                  dark
-                  fab
-                  x-small
-                  @click="onChangeReplyBtn(reply)"
+      <v-container>
+        <!-- ******************업체 유저 코멘트****************************** -->
+        <v-row v-if="reply.companyUser">
+          <v-col cols="12">
+            <v-row no-gutters justify="end" align="end">
+              <v-col class="mr-2">
+                <v-row
+                  justify="end"
+                  v-if="store.state.myName === reply.companyUser.name"
                 >
-                  <v-icon>mdi-pencil-outline</v-icon>
-                </v-btn>
-              </v-row>
-              <v-row justify="end">
-                <p>
-                  {{ $moment(reply.createdAt).format('YYYY.MM.DD - h:mm a') }}
-                </p>
-              </v-row>
-              <v-row justify="end" v-if="reply.isEdited === 'Y'">
-                <small>edited</small>
-              </v-row>
-            </v-col>
-            <v-card class="ma-3 pa-3" max-width="700">
-              <v-card-text class="heading-2 text--primary">
-                {{ reply.content }}
-              </v-card-text>
-            </v-card>
-
-            <v-avatar color="indigo" size="55">
-              <span class="white--text">{{ reply.companyUser.name }}</span>
-            </v-avatar>
-          </v-row>
-        </v-col>
-      </v-row>
-      <!-- ******************나누다 직원 코멘트****************************** -->
-      <v-row v-else align="end">
-        <v-avatar color="orange" size="55">
-          <span class="white--text">NND</span>
-        </v-avatar>
-        <v-card class="ma-3 pa-3" max-width="700">
-          <v-card-text class="heading-2 text--primary">
-            {{ reply.content }}
-          </v-card-text>
-        </v-card>
-        <v-col>
-          <v-row>
-            <p>
-              {{ $moment(reply.createdAt).format('YYYY.MM.DD - h:mm a') }}
-            </p>
-          </v-row>
-        </v-col>
-      </v-row>
+                  <v-btn
+                    color="primary"
+                    dark
+                    fab
+                    depressed
+                    x-small
+                    @click="onChangeReplyBtn(reply)"
+                  >
+                    <v-icon>mdi-pencil-outline</v-icon>
+                  </v-btn>
+                </v-row>
+                <v-row justify="end">
+                  <p class="caption m-0">
+                    <small v-if="reply.isEdited === 'Y'" class="indigo--text"
+                      >(edited)</small
+                    >
+                    {{ $moment(reply.createdAt).format('YYYY.MM.DD - h:mm a') }}
+                  </p>
+                </v-row>
+              </v-col>
+              <v-card flat class="mx-3" max-width="700">
+                <v-card-text class="heading-2 text--primary">
+                  {{ reply.content }}
+                </v-card-text>
+              </v-card>
+              <v-avatar color="indigo" size="60">
+                <span class="white--text">{{ reply.companyUser.name }}</span>
+              </v-avatar>
+            </v-row>
+          </v-col>
+        </v-row>
+        <!-- ******************나누다 직원 코멘트****************************** -->
+        <v-row no-gutters v-else align="end">
+          <v-avatar color="orange" size="60">
+            <span class="white--text">NND</span>
+          </v-avatar>
+          <v-card flat class="mx-3" max-width="700">
+            <v-card-text class="heading-2 text--primary">
+              {{ reply.content }}
+            </v-card-text>
+          </v-card>
+          <v-col class="ml-2">
+            <v-row>
+              <p class="caption mb-0">
+                {{ $moment(reply.createdAt).format('YYYY.MM.DD - h:mm a') }}
+              </p>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
-    <v-row class="mt-5" align="center">
-      <v-text-field
-        placeholder="댓글달기"
-        outlined
-        hide-details="auto"
-        v-model="QNAReplyCreateDto.content"
-        v-on:keyup.enter="addReply()"
-        class="mr-5"
-      ></v-text-field>
+    <v-card class="pa-5 mt-5" flat>
+      <v-container>
+        <v-row align="center">
+          <v-text-field
+            placeholder="댓글달기"
+            outlined
+            dense
+            hide-details="auto"
+            v-model="QNAReplyCreateDto.content"
+            v-on:keyup.enter="addReply()"
+            class="mr-5"
+          ></v-text-field>
 
-      <v-btn class="primary" large @click="addReply()" :loading="addBtnLoading"
-        >확인</v-btn
-      >
-    </v-row>
+          <v-btn class="primary" @click="addReply()" :loading="addBtnLoading"
+            >확인</v-btn
+          >
+        </v-row>
+      </v-container>
+    </v-card>
   </v-container>
 </template>
 <script lang="ts">
