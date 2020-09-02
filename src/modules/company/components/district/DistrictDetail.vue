@@ -272,7 +272,6 @@ export default class DistrictDetail extends BaseComponent {
   getDistrict() {
     this.detailLoading = true;
     companyDistrictService.findOne(this.$route.params.id).subscribe(res => {
-      // console.log('res', res);
       this.companyDistrictDto = res.data;
       this.detailLoading = false;
     });
@@ -284,7 +283,6 @@ export default class DistrictDetail extends BaseComponent {
     companyDistrictService
       .findDistrictSpaceTypeList(this.spaceTypeSearchDto, this.pagination)
       .subscribe(res => {
-        // console.log('typeList', res);
         this.typeListLoading = false;
         this.spaceTypeDtoList = res.data.items;
         this.spaceTypeListCount = res.data.totalCount;
@@ -309,7 +307,6 @@ export default class DistrictDetail extends BaseComponent {
     companyDistrictService
       .patchDistrictSpaceType(no, this.spaceTypePatchDto)
       .subscribe(res => {
-        console.log('toggleShow res', res);
         // if (res.data.delYn === YN.Y) {
         //   this.$toasted.info(
         //     '나누다키친의 심사가 끝나지않아 노출되지 않습니다',

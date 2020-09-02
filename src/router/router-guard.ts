@@ -25,11 +25,8 @@ const getPageTitle = (key: string) => {
   return '나누다 공유 플랫폼';
 };
 router.beforeEach(async (to: Route, from: Route, next: any) => {
-  console.log('beforEach');
-  console.log('to', to);
   const token = JwtStorageService.getToken();
   if (to.meta.authRequired) {
-    console.log('authRequired route');
     if (!token) {
       Vue.toasted.global.custom_error({
         message: '로그인 해주세요',
@@ -42,17 +39,13 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
         'cACsK32JnneaUA6OuYyJ2GRc5D2uP3mZcU8le60CGxSnfhdRQefZaSpgM5rzbeR',
       );
     } catch (err) {
-      console.log('token error');
       Vue.toasted.global.custom_error({
         message: err.message,
       });
       AuthService.signout();
       next('/login');
     }
-
-    // console.log('isVerified', isVerified);
     const payload = await jwtDecode(token);
-    console.log('payload', payload);
     //스토어에 로그인된 유저정보 저장
     if (!payload) {
       Vue.toasted.global.custom_error({
@@ -89,7 +82,6 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
           .getTokenByPhoneNo(getTokenByPhoneNoDto)
           .subscribe(res => {
             if (res) {
-              console.log('getTokenByPhoneNo res', res);
               jwtStorageService.setToken(res.data.token);
               if (
                 res.data.user.companyUserStatus === APPROVAL_STATUS.APPROVAL &&
@@ -120,9 +112,7 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
   else {
     // console.log('not authRequired route');
     if (to.path === '/login' || to.path === '/') {
-      console.log('token', token);
       if (token) {
-        console.log('from login resdirected to dashboard');
         next('/dashboard');
       } else {
         next();
@@ -136,6 +126,5 @@ router.afterEach((to: Route) => {
   // Finish progress bar
   //   NProgress.done();
   // set page title
-  console.log(to.meta);
   document.title = getPageTitle(`${to.meta.title} - 나누다 공유 플랫폼`);
 });

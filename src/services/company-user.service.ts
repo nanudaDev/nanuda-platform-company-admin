@@ -30,7 +30,6 @@ class CompanyUserService extends BaseService {
     return super.patch<CompanyUserDto>('company-user', companyUserDto);
   }
   getTokenByPhoneNo(dto: GetTokenByPhoneNoDto) {
-    console.log('getTokenByPhoneNo');
     return super.get<TokenByPhoneNoReturnDto>(
       'auth/company-user/find-by-phone',
       dto,

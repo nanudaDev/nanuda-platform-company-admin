@@ -53,17 +53,14 @@ export default class QNAddDialog extends BaseComponent {
       res => {
         this.loading = false;
         this.reset();
-        console.log(res);
         this.$emit('added');
       },
       err => {
         this.loading = false;
-        console.log('에러입니당', err);
       },
     );
   }
   reset() {
-    console.log('reset');
     // this.userAddDialog = false;
     this.$emit('update:dialog', !this.dialog);
     this.loading = false;
@@ -74,7 +71,6 @@ export default class QNAddDialog extends BaseComponent {
   }
   getInquiryTypeList() {
     codeManagementService.findInquiryType().subscribe(res => {
-      console.log('inquiryType list', res);
       this.QNASelectionList = res.data;
     });
   }

@@ -81,9 +81,7 @@ export class BaseService {
       return value;
     }
     Object.keys(value).map(prop => {
-      console.log(prop);
       if (value[prop] === '') {
-        console.log(value);
         delete value[prop];
       }
     });
@@ -108,11 +106,9 @@ export class BaseService {
     //axios observable에서 글로벌 에러 catch하는 코드
     Axios.interceptors.response.use(
       response => {
-        console.log('axios interceptor success');
         return response;
       },
       error => {
-        console.log('axios interceptor error');
         if (typeof error.response.data.message === 'object') {
           Vue.toasted.global.custom_error({
             message:

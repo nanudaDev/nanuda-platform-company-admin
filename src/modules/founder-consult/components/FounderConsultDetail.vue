@@ -217,7 +217,6 @@ export default class FounderConsultDetail extends BaseComponent {
     codeManagementService
       .findCompanyFounderConsultStatusList()
       .subscribe(res => {
-        console.log('res', res);
         this.companyFounderConsultList = res.data;
       });
   }

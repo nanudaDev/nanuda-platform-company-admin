@@ -15,7 +15,6 @@ const customErrorOptions = {
 Vue.toasted.register(
   'custom_error',
   payload => {
-    console.log('custom-error payload', payload);
     // if there is no message passed show default message
     if (!payload.message) {
       return '알수없는 에러 발생';
@@ -35,7 +34,6 @@ const customInfoOptions = {
 Vue.toasted.register(
   'custom_info',
   payload => {
-    console.log('custom-error payload', payload);
     // if there is no message passed show default message
     if (!payload.message) {
       return '메세지를 받지못했습니다';
@@ -55,7 +53,6 @@ const customSuccessOptions = {
 Vue.toasted.register(
   'custom_success',
   payload => {
-    console.log('custom-error payload', payload);
     // if there is no message passed show default message
     if (!payload.message) {
       return '성공!';

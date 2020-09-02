@@ -76,7 +76,6 @@ export default class UserAddDialog extends BaseComponent {
   @Prop({ required: true }) readonly dialog: boolean;
 
   reset() {
-    console.log('reset');
     // this.userAddDialog = false;
     this.$emit('update:dialog', !this.dialog);
     this.loading = false;
@@ -88,12 +87,10 @@ export default class UserAddDialog extends BaseComponent {
       res => {
         this.loading = false;
         this.reset();
-        console.log(res);
         this.$emit('added');
       },
       err => {
         this.loading = false;
-        console.log('에러입니당', err);
       },
     );
   }

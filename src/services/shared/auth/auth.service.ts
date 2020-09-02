@@ -19,7 +19,6 @@ class AuthService extends BaseService {
   }
 
   signin(credential: SigninDto): Observable<any> {
-    console.log(credential);
     return this.post('auth/company-user/login', credential);
   }
 

@@ -99,7 +99,6 @@ export default class CompanyDetail extends BaseComponent {
     });
   }
   mounted() {
-    console.log('companyDetail mounted');
     this.getCompany();
   }
   activated() {

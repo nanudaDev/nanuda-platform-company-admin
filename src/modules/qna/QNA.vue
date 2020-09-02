@@ -3,7 +3,9 @@
     <QNAAddDialog :dialog.sync="addDialog" @added="getList()"></QNAAddDialog>
     <v-row justify="space-between">
       <h5>Q&A</h5>
-      <v-btn class="primary mr-5" @click="addDialog = !addDialog">문의하기</v-btn>
+      <v-btn class="primary mr-5" @click="addDialog = !addDialog"
+        >문의하기</v-btn
+      >
     </v-row>
     <CommonTable
       :dataLoading="loading"
@@ -65,7 +67,6 @@ export default class QNA extends BaseComponent {
   getList() {
     this.loading = true;
     QNAService.findAll(null, this.QNAPagination).subscribe(res => {
-      console.log('res', res);
       this.QNAList = res.data.items;
       this.QNAListCount = res.data.totalCount;
       this.loading = false;
