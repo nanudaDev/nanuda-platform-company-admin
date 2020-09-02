@@ -12,16 +12,14 @@
     ></SpaceTypeCreateDialog>
     <div class="my-6">
       <CardWithTitle title="지점 정보" :loading="detailLoading">
-        <template v-slot:top>
-          <div v-if="companyDistrictDto.codeManagement">
+        <v-card-text>
+          <div v-if="companyDistrictDto.codeManagement" class="text-right">
             <v-chip
               :color="getColor(companyDistrictDto.codeManagement.key)"
               dark
               >{{ companyDistrictDto.codeManagement.value }}</v-chip
             >
           </div>
-        </template>
-        <v-card-text>
           <ul class="u-list" v-if="companyDistrictDto">
             <li v-if="companyDistrictDto.nameKr">
               지점명 : {{ companyDistrictDto.nameKr }}
