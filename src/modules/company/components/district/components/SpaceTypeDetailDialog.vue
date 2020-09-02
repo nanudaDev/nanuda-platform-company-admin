@@ -10,14 +10,22 @@
 
       <v-card-text>
         <v-row>
-          <v-col cols="12" md="6">
-            <v-carousel>
+          <v-col cols="12" md="6" align-self="center">
+            <v-carousel
+              v-if="spaceTypeDto.images && spaceTypeDto.images.length > 0"
+            >
               <v-carousel-item
                 v-for="item in spaceTypeDto.images"
                 :key="item.key"
                 :src="item.endpoint"
-              ></v-carousel-item>
+              >
+                ></v-carousel-item
+              >
             </v-carousel>
+            <v-img
+              v-else
+              :src="require('@/assets/images/common/default-image.jpg')"
+            ></v-img>
           </v-col>
           <v-col cols="12" md="6">
             <v-row justify="space-around">
