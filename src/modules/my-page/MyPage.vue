@@ -9,6 +9,7 @@
         <v-btn
           color="primary"
           dark
+          depressed=""
           fab
           small
           @click="infoChangeDialog = !infoChangeDialog"

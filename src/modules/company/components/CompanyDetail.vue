@@ -18,7 +18,8 @@
           <v-btn
             color="primary"
             dark
-            icon
+            fab
+            small
             depressed
             @click="infoChangeDialog = !infoChangeDialog"
             v-if="myRole === 'ADMIN_COMPANY_USER'"

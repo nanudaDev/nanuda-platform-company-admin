@@ -68,8 +68,9 @@
             <v-btn
               dark
               fab
+              depressed
               small
-              color="blue lighten-1"
+              color="primary"
               @click="spaceTypeCreateDialog = true"
             >
               <v-icon dark>mdi-plus</v-icon>

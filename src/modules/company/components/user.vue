@@ -4,27 +4,7 @@
       :dialog.sync="userAddDialog"
       @added="getList()"
     ></UserAddDialog>
-    <div>
-      <v-row justify="start" align="center">
-        <p class="body-1 ma-3" v-if="companyUserListCount">
-          검색결과 수
-          <strong class="indigo--text">{{ companyUserListCount }}</strong>
-        </p>
-
-        <!-- <v-btn @click="dialog = !dialog">유저 추가하기</v-btn> -->
-        <v-btn
-          fab
-          small
-          color="primary"
-          @click="userAddDialog = !userAddDialog"
-          class="ma-3"
-        >
-          <v-icon>mdi-plus</v-icon>
-        </v-btn>
-      </v-row>
-    </div>
-    <v-card>
-      <!-- <v-data-table
+    <!-- <v-data-table
         :headers="headers"
         :items="companyUserList"
         :loading="dataLoading"
@@ -38,16 +18,27 @@
           }}</v-chip>
         </template></v-data-table
       > -->
-      <CommonTable
-        :headers="headers"
-        :items="companyUserList"
-        :pagination="pagination"
-        :dataLoading="dataLoading"
-        @rowClicked="toSelectedItemPage"
-        :listCount="companyUserListCount"
-        @paginationChanged="getList()"
-      ></CommonTable>
-    </v-card>
+    <CommonTable
+      :headers="headers"
+      :items="companyUserList"
+      :pagination="pagination"
+      :dataLoading="dataLoading"
+      @rowClicked="toSelectedItemPage"
+      :listCount="companyUserListCount"
+      @paginationChanged="getList()"
+    >
+      <template v-slot:leftArea>
+        <v-btn
+          fab
+          small
+          depressed
+          color="primary"
+          @click="userAddDialog = !userAddDialog"
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+      </template>
+    </CommonTable>
   </div>
 </template>
 
