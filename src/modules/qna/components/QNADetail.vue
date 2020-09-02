@@ -175,7 +175,6 @@ export default class QNADetail extends BaseComponent {
   getDetail() {
     this.QNAContentLoading = true;
     QNAService.findOne(this.$route.params.id).subscribe(res => {
-      console.log('res', res);
       this.QNADto = res.data;
       this.QNAContentLoading = false;
     });
@@ -184,7 +183,6 @@ export default class QNADetail extends BaseComponent {
     this.replyLoading = true;
     QNAService.findAllReply(this.$route.params.id, this.pagination).subscribe(
       res => {
-        console.log('reply', res);
         this.replyList = res.data.items.reverse();
         this.replyCount = res.data.totalCount;
         this.replyLoading = false;
@@ -192,7 +190,6 @@ export default class QNADetail extends BaseComponent {
     );
   }
   onChangeReplyBtn(reply) {
-    console.log('reply', reply);
     this.selectedReply = reply;
     this.changeDialog = !this.changeDialog;
   }
@@ -202,7 +199,6 @@ export default class QNADetail extends BaseComponent {
       this.$route.params.id,
       this.QNAReplyCreateDto,
     ).subscribe(res => {
-      console.log('res', res);
       this.addBtnLoading = false;
       this.QNAReplyCreateDto = new QNAReplyCreateDto();
       this.getReply();
@@ -213,7 +209,6 @@ export default class QNADetail extends BaseComponent {
     this.scrollToEnd();
   }
   scrollToEnd() {
-    console.log('scrollToEnd');
     this.$nextTick(() => {
       window.scrollTo(0, 99999);
     });

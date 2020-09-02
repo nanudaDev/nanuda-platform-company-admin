@@ -3,7 +3,6 @@ import { FOUNDER_CONSULT } from '@/services/shared';
 @Component
 class FounderConsultMixin extends Vue {
   toSelectedItemPage(value) {
-    console.log('row value', value);
     // if (
     //   value.status === FOUNDER_CONSULT.F_DIST_COMPLETE &&
     //   value.viewCount === YN.N

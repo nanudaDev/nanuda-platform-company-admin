@@ -133,7 +133,6 @@ export default class CompanyChangeDialog extends BaseComponent {
   @Prop() readonly dialog: boolean;
 
   reset() {
-    console.log('reset');
     // this.userAddDialog = false;
     this.$emit('update:dialog', !this.dialog);
     this.loading = false;
@@ -144,13 +143,11 @@ export default class CompanyChangeDialog extends BaseComponent {
 
   getCompanyInfo() {
     companyService.findOne().subscribe(res => {
-      console.log('res', res);
       this.companyDto = res.data;
     });
   }
 
   async upload(event: File) {
-    console.log(event);
     const attachments = await fileUploadService.upload(
       UPLOAD_TYPE.COMPANY_LOGO,
       [event],
@@ -173,7 +170,6 @@ export default class CompanyChangeDialog extends BaseComponent {
     this.loading = true;
     companyService.change(this.companyDto).subscribe(res => {
       if (res) {
-        console.log('phone number', this.$store);
         this.getTokenByPhoneNoDto.phone = this.$store.state.myId;
         companyUserService
           .getTokenByPhoneNo(this.getTokenByPhoneNoDto)

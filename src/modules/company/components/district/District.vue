@@ -83,7 +83,6 @@ export default class District extends BaseComponent {
   private companyDistrictSearchDto = new CompanyDistrictSearchDto();
   private pagination = new Pagination();
   private dataLoading = false;
-  private clickedRowNo: number;
   private companyDistrictListCount = null;
   private accountStatusSelect: CodeManagementDto[] = [];
 

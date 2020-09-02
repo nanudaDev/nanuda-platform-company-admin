@@ -124,12 +124,10 @@ export default class SpaceTypeCreateDialog extends BaseComponent {
 
   getAmenityList() {
     amenityService.findkitchenFacility().subscribe(res => {
-      console.log('kitchenFacility', res);
       this.kitchenFacilityList = res.data;
     });
   }
   reset() {
-    console.log('reset');
     this.spaceCreateDto = new SpaceTypeCreateDto();
     this.amenityArr = [];
   }
@@ -142,7 +140,6 @@ export default class SpaceTypeCreateDialog extends BaseComponent {
       .subscribe(res => {
         if (res) {
           this.createLoading = false;
-          console.log('create', res);
           this.$toasted.global.custom_success({ message: '생성 성공!' });
           this.toggle();
           this.$emit('created');

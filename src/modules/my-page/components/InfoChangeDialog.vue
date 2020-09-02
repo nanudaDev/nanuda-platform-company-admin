@@ -78,14 +78,12 @@ export default class InfoChangeDialog extends BaseComponent {
   }
   getMyInfo() {
     companyUserService.findMe().subscribe(res => {
-      console.log('res', res);
       this.companyUserDto = res.data;
     });
   }
   requestChange() {
     this.loading = true;
     companyUserService.change(this.companyUserDto).subscribe(res => {
-      console.log(res);
       if (res) {
         this.getTokenByPhoneNoDto.phone = this.$store.state.myId;
         companyUserService

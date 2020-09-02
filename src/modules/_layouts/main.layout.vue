@@ -18,13 +18,21 @@
 
     <v-app-bar flat app height="75">
       <!-- pc -->
-      <v-app-bar-nav-icon @click.stop="mini = !mini" v-if="$vuetify.breakpoint.mdAndUp"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click.stop="mini = !mini"
+        v-if="$vuetify.breakpoint.mdAndUp"
+      ></v-app-bar-nav-icon>
       <!-- mobile -->
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-else></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+        v-else
+      ></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-row align="center" no-gutters>
-          <span class="d-block mx-5" v-if="$vuetify.breakpoint.mdAndUp">DARK MODE</span>
+          <span class="d-block mx-5" v-if="$vuetify.breakpoint.mdAndUp"
+            >DARK MODE</span
+          >
           <v-switch
             @change="onThemeChanged()"
             v-model="$vuetify.theme.dark"
@@ -74,7 +82,10 @@
     </v-main>
     <v-footer>
       <v-spacer></v-spacer>
-      <div>위대한 상사 The Great Trading Company &copy; {{ new Date().getFullYear() }}</div>
+      <div>
+        위대한 상사 The Great Trading Company &copy;
+        {{ new Date().getFullYear() }}
+      </div>
     </v-footer>
   </v-app>
 </template>
@@ -117,7 +128,6 @@ export default class MainLayout extends BaseComponent {
         tempArr.push(e);
       }
     });
-    console.log('tempArr', tempArr);
     return tempArr;
   }
   logout() {
@@ -125,8 +135,6 @@ export default class MainLayout extends BaseComponent {
     this.$router.push('/login');
   }
   onThemeChanged() {
-    console.log('onThemeChanged');
-    console.log('vuetify theme dark', this.$vuetify.theme.dark);
     // this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     let theme;
     if (this.$vuetify.theme.dark) {
@@ -137,7 +145,6 @@ export default class MainLayout extends BaseComponent {
     localStorage.setItem('theme', theme);
   }
   created() {
-    console.log('routes', routes);
     // this.getNavItems();
     if (localStorage.theme) {
       if (localStorage.theme === VUETIFY_THEME.LIGHT) {
