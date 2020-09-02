@@ -24,7 +24,7 @@
       </v-row>
     </div>
     <v-card>
-      <v-data-table
+      <!-- <v-data-table
         :headers="headers"
         :items="companyUserList"
         :loading="dataLoading"
@@ -37,9 +37,17 @@
             item.codeManagement.value
           }}</v-chip>
         </template></v-data-table
-      >
+      > -->
+      <CommonTable
+        :headers="headers"
+        :items="companyUserList"
+        :pagination="pagination"
+        :dataLoading="dataLoading"
+        @rowClicked="toSelectedItemPage"
+        :listCount="companyUserListCount"
+        @paginationChanged="getList()"
+      ></CommonTable>
     </v-card>
-    <v-pagination v-model="pagination.page" :length="pageCount"></v-pagination>
   </div>
 </template>
 
@@ -50,6 +58,7 @@ import { CompanyUserDto } from '../../../dto/company-user';
 import companyUserService from '../../../services/company-user.service';
 import { Pagination } from '@/common/interfaces/pagination.type';
 import UserAddDialog from '@/modules/company/components/UserAddDialog.vue';
+import CommonTable from '@/modules/_common/components/CommonTable.vue';
 @Component({
   components: { UserAddDialog },
 })
@@ -77,26 +86,25 @@ export default class User extends BaseComponent {
     },
     {
       text: '상태',
-      value: 'companyUserStatus',
+      value: 'codeManagement.value',
       align: 'center',
     },
   ];
   //페이지네이션 페이지 length
-  get pageCount(): number {
-    return Math.ceil(this.companyUserListCount / this.pagination.limit);
-  }
-  //pagination 객체가 변할때마다 리스트를 새로가져옴
-  @Watch('pagination', {
-    deep: true,
-  })
-  paginationChanged() {
-    this.getList();
-  }
+  // get pageCount(): number {
+  //   return Math.ceil(this.companyUserListCount / this.pagination.limit);
+  // }
+  // //pagination 객체가 변할때마다 리스트를 새로가져옴
+  // @Watch('pagination', {
+  //   deep: true,
+  // })
+  // paginationChanged() {
+  //   this.getList();
+  // }
 
   getList() {
     this.dataLoading = true;
     companyUserService.findAll(null, this.pagination).subscribe(res => {
-      console.log('res', res);
       this.dataLoading = false;
       this.companyUserList = res.data.items;
       this.companyUserListCount = res.data.totalCount;
@@ -106,6 +114,9 @@ export default class User extends BaseComponent {
     this.$router.push(`/company/user/${value.no}`);
   }
   created() {
+    this.getList();
+  }
+  activated() {
     this.getList();
   }
 }

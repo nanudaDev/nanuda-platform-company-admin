@@ -16,7 +16,7 @@ class FounderConsultService extends BaseService {
    * @param pagination
    */
   findAll(filter?: FounderConsultSearchDto, pagination?: Pagination) {
-    return this.paginate<FounderConsultDto>(
+    return super.paginate<FounderConsultDto>(
       'delivery-founder-consult',
       filter,
       pagination,
@@ -28,8 +28,9 @@ class FounderConsultService extends BaseService {
    * @param id
    */
   findOne(id: number | string) {
-    return this.get<FounderConsultDto>(`delivery-founder-consult/${id}`);
+    return super.get<FounderConsultDto>(`delivery-founder-consult/${id}`);
   }
+
   /**
    * detail
    * @param id
@@ -38,7 +39,7 @@ class FounderConsultService extends BaseService {
     id: number | string,
     companyFounderConsultFetchDto: CompanyFounderConsultFetchDto,
   ) {
-    return this.patch<FounderConsultDto>(
+    return super.patch<FounderConsultDto>(
       `delivery-founder-consult/${id}`,
       companyFounderConsultFetchDto,
     );

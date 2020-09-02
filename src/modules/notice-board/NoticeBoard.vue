@@ -94,7 +94,6 @@ export default class Contracts extends BaseComponent {
   ];
 
   toSelectedItemPage(value) {
-    console.log(value.no);
     this.$router.push(`/notice-board/${value.no}`);
   }
 

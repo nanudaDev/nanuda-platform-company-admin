@@ -5,8 +5,8 @@ class CompanyService extends BaseService {
   findOne() {
     return this.get<CompanyDto>('company/find-my-company');
   }
-  change(dto: CompanyDto) {
-    return this.patch<CompanyDto>('company', dto);
+  change(companyDto: CompanyDto) {
+    return this.patch<CompanyDto>('company', companyDto);
   }
 }
 export default new CompanyService();

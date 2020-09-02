@@ -20,14 +20,16 @@ class CompanyUserService extends BaseService {
   findMe() {
     return super.get<CompanyUserDto>('company-user/find-me');
   }
-  create(dto: CompanyUserCreateDto) {
-    return super.post<CompanyUserCreateDto>('company-user', dto);
+  create(companyUserCreateDto: CompanyUserCreateDto) {
+    return super.post<CompanyUserCreateDto>(
+      'company-user',
+      companyUserCreateDto,
+    );
   }
-  change(dto: CompanyUserDto) {
-    return super.patch<CompanyUserDto>('company-user', dto);
+  change(companyUserDto: CompanyUserDto) {
+    return super.patch<CompanyUserDto>('company-user', companyUserDto);
   }
   getTokenByPhoneNo(dto: GetTokenByPhoneNoDto) {
-    console.log('getTokenByPhoneNo');
     return super.get<TokenByPhoneNoReturnDto>(
       'auth/company-user/find-by-phone',
       dto,

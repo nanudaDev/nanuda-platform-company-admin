@@ -8,7 +8,15 @@
         <li v-if="companyUserDto.codeManagement">
           상태: {{ companyUserDto.codeManagement.value }}
         </li>
-        <li>권한: {{ companyUserDto.authCode }}</li>
+        <li>
+          권한:
+          <v-icon
+            class="orange--text caption"
+            v-if="companyUserDto.authCode == companyUserAdminRole[0]"
+            >mdi-crown</v-icon
+          >
+          <span>{{ companyUserDto.authCode | enumTransformer }}</span>
+        </li>
       </ul>
     </CardWithTitle>
   </div>
@@ -21,13 +29,14 @@ import { CompanyUserDto } from '@/dto/company-user/company-user.dto';
 import companyUserService from '@/services/company-user.service';
 import CardWithTitle from '@/modules/_common/components/CardWithTitle.vue';
 import { BaseUser } from '../../../services/shared/auth';
+import { COMPANY_USER, CONST_COMPANY_USER } from '@/services/shared';
 @Component({
   name: 'UserDetail',
   components: { CardWithTitle },
 })
 export default class UserDetail extends BaseComponent {
   private companyUserDto = new CompanyUserDto(BaseUser);
-
+  private companyUserAdminRole: COMPANY_USER[] = [...CONST_COMPANY_USER];
   getUser() {
     companyUserService.findOne(this.$route.params.id).subscribe(res => {
       this.companyUserDto = res.data;

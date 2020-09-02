@@ -36,12 +36,9 @@ export default class TableWithTitle extends Vue {
   @Prop() readonly route: boolean;
   @Prop() readonly params: object;
   formatPhoneNum(value) {
-    console.log('value', value);
     return formatPhoneNum(value);
   }
   onRowClicked(value) {
-    console.log('row', value);
-    console.log(' value.deliverySpaceNo', value.deliverySpaceNo);
     if (!this.disableLink) {
       this.$router.push({
         path: `${this.route}/${value.deliverySpaces.companyDistrictNo}`,

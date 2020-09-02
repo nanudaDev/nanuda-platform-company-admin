@@ -215,7 +215,6 @@ export default class SpaceTypeDetailDialog extends BaseComponent {
       .subscribe(res => {
         this.patchLoading = false;
         this.$toasted.global.custom_success({ message: '수정 완료!' });
-        console.log('patched', res);
         this.toggle();
         this.$emit('patched');
       });
@@ -236,14 +235,12 @@ export default class SpaceTypeDetailDialog extends BaseComponent {
   }
   getAmenityList() {
     amenityService.findkitchenFacility().subscribe(res => {
-      console.log('kitchenFacility', res);
       this.kitchenFacilityList = res.data;
     });
   }
 
   // 타입별 계약 리스트
   getContractList() {
-    console.log('getContractList');
     this.contractSearchDto.deliverySpaceNo = this.spaceTypeNo;
     contractService
       .findAll(this.contractSearchDto, this.pagination)
@@ -260,7 +257,6 @@ export default class SpaceTypeDetailDialog extends BaseComponent {
   }
 
   reset() {
-    console.log('reset');
     this.spaceTypeDto = new SpaceTypeDto();
     this.spacePatchDto = new SpaceTypePatchDto();
     this.contractDtoList = [];

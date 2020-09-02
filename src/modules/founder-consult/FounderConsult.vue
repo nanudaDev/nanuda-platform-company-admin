@@ -3,8 +3,8 @@
     <!-- <FounderConsultConfirmDialog
       :dialog.sync="confirmDialog"
       @agree="$router.push(`/founder-consult/${clickedRowNo}`)"
-    ></FounderConsultConfirmDialog> -->
-    <v-card class="p-3 px-lg-8 py-lg-6 mb-4 rounded ">
+    ></FounderConsultConfirmDialog>-->
+    <v-card class="p-3 px-lg-8 py-lg-6 mb-4 rounded">
       <v-row>
         <v-col cols="6" lg="3">
           <v-select
@@ -35,7 +35,7 @@
             dense
           >
           </v-select>
-        </v-col> -->
+        </v-col>-->
         <v-col cols="6" lg="3">
           <v-select
             v-if="founderConsultStatusSelect"
@@ -124,8 +124,7 @@
         :listCount="founderConsultListCount"
         @rowClicked="toSelectedItemPage"
         @paginationChanged="getList()"
-      >
-      </CommonTable>
+      ></CommonTable>
     </v-card>
   </div>
 </template>

@@ -32,6 +32,7 @@
           hideFooter
         ></TableWithTitle> -->
         <SpaceInfoCard
+          :loading="loading"
           title="신청공간 정보"
           :founderConsultDto="founderConsultDto"
           @click="spaceTypeDetailDialog = true"
@@ -216,7 +217,6 @@ export default class FounderConsultDetail extends BaseComponent {
     codeManagementService
       .findCompanyFounderConsultStatusList()
       .subscribe(res => {
-        console.log('res', res);
         this.companyFounderConsultList = res.data;
       });
   }

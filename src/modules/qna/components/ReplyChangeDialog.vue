@@ -41,9 +41,7 @@ export default class ReplyChangeDialog extends BaseComponent {
     return this.QNAReplyCreateDto;
   }
   getReply() {
-    console.log('getReply');
     QNAService.getReply(this.QNAid, this.replyNo).subscribe(res => {
-      console.log('res', res);
       this.QNAReplyDto = res.data;
     });
   }
@@ -56,7 +54,6 @@ export default class ReplyChangeDialog extends BaseComponent {
     ).subscribe(res => {
       this.loading = false;
       if (res) {
-        console.log('res', res);
         this.toggle();
         this.$emit('changed');
         this.$toasted.global.custom_success({ message: '수정 성공!' });

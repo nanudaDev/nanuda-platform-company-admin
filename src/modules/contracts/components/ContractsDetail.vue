@@ -90,7 +90,6 @@ export default class ContractsDetail extends BaseComponent {
     contractService.findOne(this.$route.params.id).subscribe(res => {
       this.detailLoading = false;
       this.contractDto = res.data;
-      console.log('detail', res);
     });
   }
   deleteContract() {

@@ -111,7 +111,6 @@ class FileUploadService extends BaseService {
    * @param files
    */
   async upload(uploadType: UPLOAD_TYPE, files: FileList | File[]) {
-    console.log(uploadType, files);
     const attachments: FileAttachmentDto[] = [];
     const uploadOption = FileUploadService.UPLOAD_OPTIONS[uploadType];
     const endpointUrl =
@@ -121,14 +120,12 @@ class FileUploadService extends BaseService {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      console.log(uploadOption);
       if (file.size > uploadOption.sizeLimit) {
         attachments.push({
           attachmentReasonType: ATTACHMENT_REASON_TYPE.SIZE,
           originFilename: file.name,
           mimetype: file.type,
         });
-        console.log('somethin went wrong');
         return;
       }
       if (!this.mimeTypes[uploadOption.mimeType].includes(file.type)) {
@@ -137,8 +134,6 @@ class FileUploadService extends BaseService {
           originFilename: file.name,
           mimetype: file.type,
         });
-        console.log('test');
-        console.log('somethin went wrong');
         return;
       }
 
@@ -150,7 +145,6 @@ class FileUploadService extends BaseService {
           mimetype: file.type,
         },
       );
-      console.log(presigned.data);
       if (!presigned || !presigned.data.url) {
         attachments.push({
           attachmentReasonType: ATTACHMENT_REASON_TYPE.ETC,
@@ -159,7 +153,6 @@ class FileUploadService extends BaseService {
         });
         return;
       }
-      console.log(presigned.data);
       //   toPromise()
       await axios.put(presigned.data.url, file, {
         headers: {
