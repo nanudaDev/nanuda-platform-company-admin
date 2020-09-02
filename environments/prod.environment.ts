@@ -3,7 +3,7 @@ import { Environment, EnvironmentType } from './environment.type';
 
 export const ProductionEnvironment: Environment = {
   // baseURL: 'https://platform-api.nanudakitchen.com/',
-  baseURL: 'http://61.97.191.100:4200/',
+  baseURL: 'https://platform-api.nanudakitchen.com/',
   NODE_ENV: EnvironmentType.production,
   production: false,
   clientName: packageInfo.name,

@@ -36,7 +36,11 @@
             justify="center"
             class="my-4"
           >
-            <div v-for="logo in companyDto.logo" :key="logo.endpoint">
+            <div
+              v-for="logo in companyDto.logo"
+              :key="logo.endpoint"
+              style="background-color: white;"
+            >
               <v-img
                 :src="logo.endpoint"
                 max-width="200"
