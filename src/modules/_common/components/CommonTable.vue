@@ -1,12 +1,13 @@
 <template>
   <div>
-    <div v-if="listCount" class="px-4">
+    <div class="px-4">
       <v-row justify="space-between" align="end">
         <v-col>
-          <p class="body-1 mb-0" v-if="listCount">
+          <span class="body-1 mb-0 mr-4" v-if="listCount">
             TOTAL
             <strong class="indigo--text">{{ listCount }}</strong>
-          </p>
+          </span>
+          <slot name="leftArea"></slot>
         </v-col>
         <!-- TODO: 출력수 input 이벤트 함수로 -->
         <!-- <v-col cols="2" class="py-0"

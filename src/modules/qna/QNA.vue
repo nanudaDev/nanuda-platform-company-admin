@@ -1,12 +1,6 @@
 <template>
-  <v-container>
+  <div>
     <QNAAddDialog :dialog.sync="addDialog" @added="getList()"></QNAAddDialog>
-    <v-row justify="space-between">
-      <h5>Q&A</h5>
-      <v-btn class="primary mr-5" @click="addDialog = !addDialog"
-        >문의하기</v-btn
-      >
-    </v-row>
     <CommonTable
       :dataLoading="loading"
       :headers="QNAheaders"
@@ -15,8 +9,20 @@
       :listCount="QNAListCount"
       @rowClicked="toSelectedQNAPage"
       @paginationChanged="getList()"
-    ></CommonTable>
-  </v-container>
+    >
+      <template v-slot:leftArea>
+        <v-btn
+          fab
+          small
+          depressed
+          color="primary"
+          @click="addDialog = !addDialog"
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+      </template>
+    </CommonTable>
+  </div>
 </template>
 <script lang="ts">
 import BaseComponent from '@/core/base.component';
