@@ -111,6 +111,12 @@
                           hide-details
                           @change="toggleShow(item.no, item.showYn)"
                           class="mt-0"
+                          :label="
+                            item.delYn === 'Y'
+                              ? '승인전 노출 활성화 불가'
+                              : null
+                          "
+                          :disabled="item.delYn === 'Y'"
                         ></v-switch>
                       </v-row>
                       <v-btn
