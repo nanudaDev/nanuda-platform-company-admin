@@ -13,7 +13,6 @@ import Vue from 'vue';
 import { APPROVAL_STATUS } from '@/services/shared';
 import AuthService from '@/services/shared/auth/auth.service';
 import companyUserService from '@/services/company-user.service';
-import { GetTokenByPhoneNoDto } from '@/services/shared/auth/dto';
 import jwtStorageService from '@/services/shared/auth/jwt-storage.service';
 // const whiteList = ['/login', '/auth-redirect'];
 // NProgress.configure({ showSpinner: true });
@@ -56,7 +55,7 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
     }
     //스토어에 유저정보 저장
     store.dispatch('setProfile', payload);
-
+    console.log('payload', payload);
     const authCode = payload.adminRole;
     const hasPermission = () =>
       to.meta.roles.some(role => {
@@ -68,7 +67,6 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
         message: `${to.path}으로 진입할 권한이 없습니다. 가능한 등급: ${to.meta.roles} | 본인 등급: ${authCode}`,
       });
     }
-
     const approved =
       payload.companyStatus === APPROVAL_STATUS.APPROVAL &&
       payload.userStatus === APPROVAL_STATUS.APPROVAL;
@@ -76,25 +74,23 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
     //유저,업체 상태 체크
     if (to.meta.approveRequired) {
       if (!approved) {
-        const getTokenByPhoneNoDto = new GetTokenByPhoneNoDto();
-        getTokenByPhoneNoDto.phone = store.state.myId;
-        companyUserService
-          .getTokenByPhoneNo(getTokenByPhoneNoDto)
-          .subscribe(res => {
-            if (res) {
-              jwtStorageService.setToken(res.data.token);
-              if (
-                res.data.user.companyUserStatus === APPROVAL_STATUS.APPROVAL &&
-                res.data.user.company.companyStatus === APPROVAL_STATUS.APPROVAL
-              ) {
-                next();
-              } else {
-                next('/no-auth');
-              }
+        companyUserService.getTokenById().subscribe(res => {
+          if (res) {
+            console.log('res', res);
+            jwtStorageService.setToken(res.data.token);
+            if (
+              res.data.companyUserStatus === APPROVAL_STATUS.APPROVAL &&
+              res.data.companyStatus === APPROVAL_STATUS.APPROVAL
+            ) {
+              next();
             } else {
+              console.log('going no-auth');
               next('/no-auth');
             }
-          });
+          } else {
+            next('/no-auth');
+          }
+        });
       } else {
         next();
       }

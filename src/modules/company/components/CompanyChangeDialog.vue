@@ -111,7 +111,7 @@
 import BaseComponent from '@/core/base.component';
 import { Component, Prop } from 'vue-property-decorator';
 import { CompanyDto } from '@/dto/company/company.dto';
-import { BaseUser, GetTokenByPhoneNoDto } from '../../../services/shared/auth';
+import { BaseUser } from '../../../services/shared/auth';
 import companyService from '../../../services/company.service';
 import fileUploadService, {
   UPLOAD_TYPE,
@@ -132,7 +132,6 @@ export default class CompanyChangeDialog extends BaseComponent {
   private loading = false;
   private logoChanged = false;
   private logo: FileAttachmentDto[] = [];
-  private getTokenByPhoneNoDto = new GetTokenByPhoneNoDto();
 
   @Prop() readonly dialog: boolean;
 
@@ -174,18 +173,15 @@ export default class CompanyChangeDialog extends BaseComponent {
     this.loading = true;
     companyService.change(this.companyDto).subscribe(res => {
       if (res) {
-        this.getTokenByPhoneNoDto.phone = this.$store.state.myId;
-        companyUserService
-          .getTokenByPhoneNo(this.getTokenByPhoneNoDto)
-          .subscribe(res => {
-            this.loading = false;
-            jwtStorageService.setToken(res.data.token);
-            this.reset();
-            this.$emit('requested');
-            this.$toasted.global.custom_success({
-              message: '정보 변경 신청 성공!',
-            });
+        companyUserService.getTokenById().subscribe(res => {
+          this.loading = false;
+          jwtStorageService.setToken(res.data.token);
+          this.reset();
+          this.$emit('requested');
+          this.$toasted.global.custom_success({
+            message: '정보 변경 신청 성공!',
           });
+        });
       } else {
         this.loading = false;
       }
