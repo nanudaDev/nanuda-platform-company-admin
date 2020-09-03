@@ -6,42 +6,60 @@
     ></PasswordChangeDialog>
     <CardWithTitle title="내 정보">
       <template v-slot:top>
-        <v-btn
-          color="primary"
-          dark
-          depressed=""
-          fab
-          small
-          @click="infoChangeDialog = !infoChangeDialog"
-        >
-          <v-icon>mdi-pencil-outline</v-icon>
-        </v-btn>
+        <div>
+          <v-btn
+            color="primary"
+            dark
+            depressed=""
+            fab
+            small
+            @click="infoChangeDialog = !infoChangeDialog"
+          >
+            <v-icon>mdi-pencil-outline</v-icon>
+          </v-btn>
+        </div>
       </template>
       <v-card-text>
-        <ul class="u-list">
-          <li v-if="companyUserDto.name">이름 : {{ companyUserDto.name }}</li>
-          <li v-if="companyUserDto.phone">
-            핸드폰번호: {{ companyUserDto.phone }}
-          </li>
-          <li v-if="companyUserDto.email">
-            이메일: {{ companyUserDto.email }}
-          </li>
-          <li v-if="companyUserDto.authCode">
-            권한 :
-            <v-icon
-              class="orange--text caption"
-              v-if="companyUserDto.authCode == companyUserAdminRole[0]"
-              >mdi-crown</v-icon
-            >
-            <span>{{ companyUserDto.authCode | enumTransformer }}</span>
-          </li>
-        </ul>
+        <div class="text-right">
+          <v-chip
+            v-if="companyUserDto.codeManagement"
+            dark
+            :color="getColor(companyUserDto.codeManagement.key)"
+            class="mr-2"
+          >
+            {{ companyUserDto.codeManagement.value }}
+          </v-chip>
+        </div>
+        <div>
+          <ul class="u-list">
+            <li v-if="companyUserDto.name">이름 : {{ companyUserDto.name }}</li>
+            <li v-if="companyUserDto.phone">
+              핸드폰번호: {{ companyUserDto.phone }}
+            </li>
+            <li v-if="companyUserDto.email">
+              이메일: {{ companyUserDto.email }}
+            </li>
+            <li v-if="companyUserDto.authCode">
+              권한 :
+              <v-icon
+                class="orange--text caption"
+                v-if="companyUserDto.authCode == companyUserAdminRole[0]"
+                >mdi-crown</v-icon
+              >
+              <span>{{ companyUserDto.authCode | enumTransformer }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="mt-4">
+          <v-btn
+            color="secondary"
+            outlined
+            small
+            @click="passwordChangeDialog = !passwordChangeDialog"
+            >비밀번호 변경</v-btn
+          >
+        </div>
       </v-card-text>
-      <v-btn
-        class="primary"
-        @click="passwordChangeDialog = !passwordChangeDialog"
-        >비밀번호 변경</v-btn
-      >
     </CardWithTitle>
   </div>
 </template>

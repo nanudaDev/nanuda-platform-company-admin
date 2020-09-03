@@ -7,14 +7,6 @@
     <CardWithTitle title="업체 정보" :loading="detailLoading">
       <template v-slot:top>
         <div>
-          <v-chip
-            v-if="companyDto.codeManagement"
-            dark
-            :color="getColor(companyDto.codeManagement.key)"
-            class="mr-2"
-          >
-            {{ companyDto.codeManagement.value }}
-          </v-chip>
           <v-btn
             color="primary"
             dark
@@ -30,6 +22,16 @@
       </template>
       <v-card-text>
         <div>
+          <div class="text-right">
+            <v-chip
+              v-if="companyDto.codeManagement"
+              dark
+              :color="getColor(companyDto.codeManagement.key)"
+              class="mr-2"
+            >
+              {{ companyDto.codeManagement.value }}
+            </v-chip>
+          </div>
           <v-row
             v-if="companyDto.logo && companyDto.logo.length > 0"
             align="center"

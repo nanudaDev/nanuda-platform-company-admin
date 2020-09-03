@@ -10,39 +10,60 @@
           </CardWithTitle>
       </v-col>-->
       <v-col cols="12" class="my-3">
-        <CardWithTitle title="최신 공지 사항">
-          <template v-slot:top>
-            <v-btn icon color="grey lighten-1" @click="$router.push('/notice-board')">
+        <v-row no-gutters justify="space-between" align="center" class="px-3">
+          <div>
+            <h5 class="mb-0">최신 공지 사항</h5>
+          </div>
+          <div>
+            <v-btn
+              fab
+              depressed
+              small
+              color="grey"
+              dark
+              @click="$router.push('/notice-board')"
+            >
               <v-icon>mdi-arrow-right</v-icon>
             </v-btn>
-          </template>
-          <CommonTable
-            :dataLoading="noticeLoading"
-            :headers="noticeBoardHeader"
-            :items="noticeList"
-            :pagination="noticePagination"
-            @rowClicked="toSelectedNoticePage"
-            @paginationChanged="getNoticeList()"
-            :showPagination="false"
-          ></CommonTable>
-        </CardWithTitle>
+          </div>
+        </v-row>
+        <CommonTable
+          :dataLoading="noticeLoading"
+          :headers="noticeBoardHeader"
+          :items="noticeList"
+          :pagination="noticePagination"
+          @rowClicked="toSelectedNoticePage"
+          @paginationChanged="getNoticeList()"
+          :showPagination="false"
+        >
+        </CommonTable>
       </v-col>
       <v-col cols="12" class="my-3">
-        <CardWithTitle title="최신 신청">
-          <template v-slot:top>
-            <v-btn icon color="grey lighten-1" @click="$router.push('/founder-consult')">
+        <v-row no-gutters justify="space-between" align="center" class="px-3">
+          <div>
+            <h5 class="mb-0">최신 신청</h5>
+          </div>
+          <div>
+            <v-btn
+              fab
+              depressed
+              small
+              color="grey"
+              dark
+              @click="$router.push('/founder-consult')"
+            >
               <v-icon>mdi-arrow-right</v-icon>
             </v-btn>
-          </template>
-          <CommonTable
-            :dataLoading="recentLoading"
-            :headers="founderConsultHeaders"
-            :items="founderConsultList"
-            :pagination="consultPagination"
-            @rowClicked="toSelectedItemPage"
-            :showPagination="false"
-          ></CommonTable>
-        </CardWithTitle>
+          </div>
+        </v-row>
+        <CommonTable
+          :dataLoading="recentLoading"
+          :headers="founderConsultHeaders"
+          :items="founderConsultList"
+          :pagination="consultPagination"
+          @rowClicked="toSelectedItemPage"
+          :showPagination="false"
+        ></CommonTable>
       </v-col>
     </v-row>
   </div>

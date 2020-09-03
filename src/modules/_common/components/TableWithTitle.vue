@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%;">
+  <div>
     <v-row align="center" class="ma-2">
       <div class="subtitle">{{ title }}</div>
       <slot name="top"></slot>
