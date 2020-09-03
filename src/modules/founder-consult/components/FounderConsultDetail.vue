@@ -70,6 +70,7 @@
         <CardWithTitle title="상담상태">
           <v-select
             outlined
+            dense
             placeholder="상태"
             :items="companyFounderConsultList"
             item-text="value"

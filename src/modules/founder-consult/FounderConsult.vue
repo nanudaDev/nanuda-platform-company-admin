@@ -4,7 +4,7 @@
       :dialog.sync="confirmDialog"
       @agree="$router.push(`/founder-consult/${clickedRowNo}`)"
     ></FounderConsultConfirmDialog>-->
-    <v-card class="p-3 px-lg-8 py-lg-6 mb-4 rounded">
+    <v-card flat class="p-3 px-lg-8 py-lg-6 mb-4 rounded">
       <v-row>
         <v-col cols="6" lg="3">
           <v-select
@@ -115,17 +115,15 @@
         </v-btn>
       </div>
     </v-card>
-    <v-card>
-      <CommonTable
-        :headers="headers"
-        :dataLoading="dataLoading"
-        :pagination="pagination"
-        :items="founderConsultList"
-        :listCount="founderConsultListCount"
-        @rowClicked="toSelectedItemPage"
-        @paginationChanged="getList()"
-      ></CommonTable>
-    </v-card>
+    <CommonTable
+      :headers="headers"
+      :dataLoading="dataLoading"
+      :pagination="pagination"
+      :items="founderConsultList"
+      :listCount="founderConsultListCount"
+      @rowClicked="toSelectedItemPage"
+      @paginationChanged="getList()"
+    ></CommonTable>
   </div>
 </template>
 

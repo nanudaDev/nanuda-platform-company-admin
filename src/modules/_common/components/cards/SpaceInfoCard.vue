@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="subtitle mb-3">{{ title }}</div>
+    <v-row class="ma-2">
+      <div class="subtitle">{{ title }}</div>
+    </v-row>
     <v-card class="card pa-5" flat :loading="loading">
       <v-row align="center">
         <v-col>

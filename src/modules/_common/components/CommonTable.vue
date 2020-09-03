@@ -2,13 +2,15 @@
   <div>
     <div class="px-4">
       <v-row justify="space-between" align="end">
-        <v-col>
-          <span class="body-1 mb-0 mr-4" v-if="listCount">
-            TOTAL
-            <strong class="indigo--text">{{ listCount }}</strong>
-          </span>
-          <slot name="leftArea"></slot>
-        </v-col>
+        <div>
+          <v-row no-gutters align="center">
+            <div class="body-1 mr-4" v-if="listCount">
+              TOTAL
+              <strong class="indigo--text">{{ listCount }}</strong>
+            </div>
+            <slot name="leftArea"></slot>
+          </v-row>
+        </div>
         <!-- TODO: 출력수 input 이벤트 함수로 -->
         <!-- <v-col cols="2" class="py-0"
           ><v-select
@@ -21,7 +23,7 @@
         ></v-col> -->
       </v-row>
     </div>
-    <v-card flat class="rounded">
+    <v-card flat class="rounded mt-2">
       <!-- :items-per-page="pagination.limit"
         @page-count="pageCount = $event" 
            :page.sync="pagination.page"-->
@@ -35,17 +37,17 @@
         :items-per-page="pagination.limit"
       >
         <template v-slot:[`item.companyDecisionStatusCode.value`]="{ item }">
-          <v-chip :color="getColor(item.companyDecisionStatusCode.key)" light>
+          <v-chip :color="getColor(item.companyDecisionStatusCode.key)" dark>
             <strong>{{ item.companyDecisionStatusCode.value }}</strong>
           </v-chip>
         </template>
         <template v-slot:[`item.codeManagement.value`]="{ item }">
-          <v-chip :color="getColor(item.codeManagement.key)" light>
+          <v-chip :color="getColor(item.codeManagement.key)" dark>
             <strong>{{ item.codeManagement.value }}</strong>
           </v-chip>
         </template>
         <template v-slot:[`item.viewCount`]="{ item }">
-          <v-chip :color="getColor(item.viewCount)" light>
+          <v-chip :color="getColor(item.viewCount)" dark>
             <strong>{{ item.viewCount }}</strong>
           </v-chip>
         </template>
