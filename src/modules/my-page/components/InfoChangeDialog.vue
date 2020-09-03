@@ -53,7 +53,7 @@
 import BaseComponent from '@/core/base.component';
 import { Component, Prop } from 'vue-property-decorator';
 import { CompanyUserDto } from '@/dto/company-user/company-user.dto';
-import { BaseUser, GetTokenByPhoneNoDto } from '../../../services/shared/auth';
+import { BaseUser } from '../../../services/shared/auth';
 import companyUserService from '../../../services/company-user.service';
 import store from '@/store';
 import { APPROVAL_STATUS } from '@/services/shared';
@@ -65,7 +65,6 @@ import ApprovalStatusChangeInfoText from '@/modules/_common/components/info-text
 })
 export default class InfoChangeDialog extends BaseComponent {
   private companyUserDto = new CompanyUserDto(BaseUser);
-  private getTokenByPhoneNoDto = new GetTokenByPhoneNoDto();
   private loading = false;
 
   @Prop() readonly dialog: boolean;
@@ -85,17 +84,14 @@ export default class InfoChangeDialog extends BaseComponent {
     this.loading = true;
     companyUserService.change(this.companyUserDto).subscribe(res => {
       if (res) {
-        this.getTokenByPhoneNoDto.phone = this.$store.state.myId;
-        companyUserService
-          .getTokenByPhoneNo(this.getTokenByPhoneNoDto)
-          .subscribe(res => {
-            jwtStorageService.setToken(res.data.token);
-            this.reset();
+        companyUserService.getTokenById().subscribe(res => {
+          jwtStorageService.setToken(res.data.token);
+          this.reset();
 
-            this.$toasted.global.custom_success({
-              message: '정보 변경 신청 성공!',
-            });
+          this.$toasted.global.custom_success({
+            message: '정보 변경 신청 성공!',
           });
+        });
       }
       this.loading = false;
     });
