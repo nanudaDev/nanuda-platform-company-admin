@@ -5,10 +5,7 @@ import {
   CompanyUserSearchDto,
   CompanyUserCreateDto,
 } from '@/dto/company-user';
-import {
-  GetTokenByPhoneNoDto,
-  TokenByPhoneNoReturnDto,
-} from './shared/auth/dto';
+import { GetTokenByIdReturnDto } from './shared/auth/dto';
 
 class CompanyUserService extends BaseService {
   findAll(filter: CompanyUserSearchDto, paginate: Pagination) {
@@ -29,11 +26,8 @@ class CompanyUserService extends BaseService {
   change(companyUserDto: CompanyUserDto) {
     return super.patch<CompanyUserDto>('company-user', companyUserDto);
   }
-  getTokenByPhoneNo(dto: GetTokenByPhoneNoDto) {
-    return super.get<TokenByPhoneNoReturnDto>(
-      'auth/company-user/find-by-phone',
-      dto,
-    );
+  getTokenById() {
+    return super.get<GetTokenByIdReturnDto>('auth/company-user/find-by-id');
   }
 }
 export default new CompanyUserService();
