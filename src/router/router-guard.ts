@@ -55,7 +55,6 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
     }
     //스토어에 유저정보 저장
     store.dispatch('setProfile', payload);
-    console.log('payload', payload);
     const authCode = payload.adminRole;
     const hasPermission = () =>
       to.meta.roles.some(role => {
@@ -70,21 +69,19 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
     const approved =
       payload.companyStatus === APPROVAL_STATUS.APPROVAL &&
       payload.userStatus === APPROVAL_STATUS.APPROVAL;
-
+    // console.log('approved', approved);
     //유저,업체 상태 체크
     if (to.meta.approveRequired) {
       if (!approved) {
         companyUserService.getTokenById().subscribe(res => {
           if (res) {
-            console.log('res', res);
             jwtStorageService.setToken(res.data.token);
             if (
-              res.data.companyUserStatus === APPROVAL_STATUS.APPROVAL &&
-              res.data.companyStatus === APPROVAL_STATUS.APPROVAL
+              res.data.user.companyUserStatus === APPROVAL_STATUS.APPROVAL &&
+              res.data.user.companyStatus === APPROVAL_STATUS.APPROVAL
             ) {
               next();
             } else {
-              console.log('going no-auth');
               next('/no-auth');
             }
           } else {
