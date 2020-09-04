@@ -15,7 +15,7 @@
         <v-card-text>
           <v-row>
             <v-col>
-              <div id="map" style="width:500px;height:400px;"></div>
+              <div id="map" style="width:100%;height:400px;"></div>
             </v-col>
             <v-col>
               <div v-if="companyDistrictDto.codeManagement" class="text-right">
