@@ -15,6 +15,7 @@ export class CompanyUserDto extends BaseUser {
   password: string;
   companyNo: number;
   passwordChangedYn?: YN;
+  companyStatus: APPROVAL_STATUS;
   companyUserStatus: APPROVAL_STATUS;
   nanudaUser: object;
   company: CompanyDto;
