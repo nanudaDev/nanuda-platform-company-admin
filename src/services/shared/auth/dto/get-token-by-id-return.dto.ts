@@ -6,4 +6,5 @@ export class GetTokenByIdReturnDto extends BaseDto<GetTokenByIdReturnDto> {
   token: string;
   companyUserStatus: APPROVAL_STATUS;
   companyStatus: APPROVAL_STATUS;
+  user: CompanyUserDto;
 }
