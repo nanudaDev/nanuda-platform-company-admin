@@ -21,6 +21,11 @@
 </template>
 
 <script lang="ts">
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import BaseComponent from './core/base.component';
 import store from '@/store';

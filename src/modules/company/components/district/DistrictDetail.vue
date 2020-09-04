@@ -13,49 +13,63 @@
     <div class="my-6">
       <CardWithTitle title="지점 정보" :loading="detailLoading">
         <v-card-text>
-          <div v-if="companyDistrictDto.codeManagement" class="text-right">
-            <v-chip
-              :color="getColor(companyDistrictDto.codeManagement.key)"
-              dark
-              >{{ companyDistrictDto.codeManagement.value }}</v-chip
-            >
-          </div>
-          <ul class="u-list" v-if="companyDistrictDto">
-            <li v-if="companyDistrictDto.nameKr">
-              지점명 : {{ companyDistrictDto.nameKr }}
-              <span v-if="companyDistrictDto.nameEng"
-                >({{ companyDistrictDto.nameEng }})</span
-              >
-            </li>
-            <li v-if="companyDistrictDto.address">
-              주소 : {{ companyDistrictDto.address }}
-            </li>
-            <li
-              v-if="
-                companyDistrictDto.amenities &&
-                  companyDistrictDto.amenities.length > 0
-              "
-            >
-              공용시설:
-              <span
-                v-for="item in companyDistrictDto.amenities"
-                :key="item.no"
-                class="m-1"
-              >
-                <v-chip color="teal" dark label x-small class="darken-3 mx-1">
-                  {{ item.amenityName }}
-                </v-chip>
-              </span>
-            </li>
-            <li v-if="companyDistrictDto.createdAt">
-              등록일 :
-              {{
-                $moment(companyDistrictDto.createdAt).format(
-                  'YYYY.MM.DD h:mm A',
-                )
-              }}
-            </li>
-          </ul>
+          <v-row>
+            <v-col>
+              <div id="map" style="width:500px;height:400px;"></div>
+            </v-col>
+            <v-col>
+              <div v-if="companyDistrictDto.codeManagement" class="text-right">
+                <v-chip
+                  :color="getColor(companyDistrictDto.codeManagement.key)"
+                  dark
+                  >{{ companyDistrictDto.codeManagement.value }}</v-chip
+                >
+              </div>
+
+              <ul class="u-list" v-if="companyDistrictDto">
+                <li v-if="companyDistrictDto.nameKr">
+                  지점명 : {{ companyDistrictDto.nameKr }}
+                  <span v-if="companyDistrictDto.nameEng"
+                    >({{ companyDistrictDto.nameEng }})</span
+                  >
+                </li>
+                <li v-if="companyDistrictDto.address">
+                  주소 : {{ companyDistrictDto.address }}
+                </li>
+                <li
+                  v-if="
+                    companyDistrictDto.amenities &&
+                      companyDistrictDto.amenities.length > 0
+                  "
+                >
+                  공용시설:
+                  <span
+                    v-for="item in companyDistrictDto.amenities"
+                    :key="item.no"
+                    class="m-1"
+                  >
+                    <v-chip
+                      color="teal"
+                      dark
+                      label
+                      x-small
+                      class="darken-3 mx-1"
+                    >
+                      {{ item.amenityName }}
+                    </v-chip>
+                  </span>
+                </li>
+                <li v-if="companyDistrictDto.createdAt">
+                  등록일 :
+                  {{
+                    $moment(companyDistrictDto.createdAt).format(
+                      'YYYY.MM.DD h:mm A',
+                    )
+                  }}
+                </li>
+              </ul>
+            </v-col>
+          </v-row>
         </v-card-text>
       </CardWithTitle>
     </div>
@@ -240,12 +254,15 @@ import {
 import { Pagination } from '@/core';
 import { SpaceTypeDto } from '@/dto/company-district/space-type.dto';
 import { YN } from '@/services/shared';
-
 import { getColor } from '@/modules/_common/utils/getColor';
 
 @Component({
   name: 'DistrictDetail',
-  components: { CardWithTitle, SpaceTypeDetailDialog, SpaceTypeCreateDialog },
+  components: {
+    CardWithTitle,
+    SpaceTypeDetailDialog,
+    SpaceTypeCreateDialog,
+  },
 })
 export default class DistrictDetail extends BaseComponent {
   private companyDistrictDto = new CompanyDistrictDto();
@@ -259,7 +276,6 @@ export default class DistrictDetail extends BaseComponent {
   private spaceTypeDetailDialog = false;
   private spaceTypeCreateDialog = false;
   private spaceTypeNo: number | string | string[] = null;
-
   get pageCount(): number {
     return Math.ceil(this.spaceTypeListCount / this.pagination.limit);
   }
@@ -278,6 +294,7 @@ export default class DistrictDetail extends BaseComponent {
     this.detailLoading = true;
     companyDistrictService.findOne(this.$route.params.id).subscribe(res => {
       this.companyDistrictDto = res.data;
+      this.setMap(res.data);
       this.detailLoading = false;
     });
   }
@@ -319,6 +336,25 @@ export default class DistrictDetail extends BaseComponent {
         // }
         this.getSpaceTypeList();
       });
+  }
+  // 지도 가져오기
+  setMap(district: CompanyDistrictDto) {
+    const mapContainer = document.getElementById('map'),
+      mapOption = {
+        center: new window.kakao.maps.LatLng(district.lat, district.lon),
+        level: 3,
+        mapTypeId: window.kakao.maps.MapTypeId.ROADMAP,
+      };
+
+    const map = new window.kakao.maps.Map(mapContainer, mapOption);
+    const markerPosition = new window.kakao.maps.LatLng(
+      district.lat,
+      district.lon,
+    );
+    const marker = new window.kakao.maps.Marker({
+      position: markerPosition,
+    });
+    marker.setMap(map);
   }
   created() {
     // console.log('companyDetail mounted');
