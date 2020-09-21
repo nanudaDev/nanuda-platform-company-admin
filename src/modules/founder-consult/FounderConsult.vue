@@ -175,7 +175,7 @@ export default class FounderConsultList extends Mixins(FounderConsultMixin) {
     //   align: 'center',
     // },
     {
-      text: 'no',
+      text: 'ID',
       value: 'no',
       align: 'center',
     },
