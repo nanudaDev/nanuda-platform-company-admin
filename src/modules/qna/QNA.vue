@@ -11,13 +11,7 @@
       @paginationChanged="getList()"
     >
       <template v-slot:leftArea>
-        <v-btn
-          fab
-          small
-          depressed
-          color="primary"
-          @click="addDialog = !addDialog"
-        >
+        <v-btn fab small depressed color="primary" @click="addDialog = !addDialog">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </template>
@@ -42,7 +36,7 @@ export default class QNA extends BaseComponent {
   private loading = false;
   private QNAheaders = [
     {
-      text: 'no',
+      text: 'ID',
       value: 'no',
       align: 'center',
     },
