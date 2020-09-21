@@ -16,20 +16,14 @@
           <v-col cols="12" md="3">
             <v-text-field
               v-model="spaceCreateDto.quantity"
-              label="구좌수"
+              label="타입 수"
               outlined
               hide-details
               dense
             ></v-text-field>
           </v-col>
           <v-col cols="12" md="3">
-            <v-text-field
-              v-model="spaceCreateDto.size"
-              label="평수"
-              outlined
-              hide-details
-              dense
-            ></v-text-field>
+            <v-text-field v-model="spaceCreateDto.size" label="평수" outlined hide-details dense></v-text-field>
           </v-col>
           <v-col cols="12" md="4">
             <v-text-field
@@ -78,22 +72,11 @@
         </v-row>
       </v-card-text>
       <v-card-actions>
-        <v-alert type="info" dense outlined
-          >이미지 추가는 나누다키친 측에서 하게 됩니다</v-alert
-        >
+        <v-alert type="info" dense outlined>이미지 추가는 나누다키친 측에서 하게 됩니다</v-alert>
         <v-spacer></v-spacer>
-        <v-btn color="green darken-1" text @click="toggle()">
-          취소
-        </v-btn>
+        <v-btn color="green darken-1" text @click="toggle()">취소</v-btn>
 
-        <v-btn
-          color="green darken-1"
-          text
-          @click="create()"
-          :loading="createLoading"
-        >
-          생성
-        </v-btn>
+        <v-btn color="green darken-1" text @click="create()" :loading="createLoading">생성</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

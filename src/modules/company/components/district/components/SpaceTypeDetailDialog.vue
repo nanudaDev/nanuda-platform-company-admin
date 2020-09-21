@@ -1,31 +1,19 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    scrollable
-    max-width="1000px"
-    @click:outside="toggle()"
-  >
+  <v-dialog v-model="dialog" scrollable max-width="1000px" @click:outside="toggle()">
     <v-card :loading="loading">
       <v-card-title class="headline">타입 상세보기</v-card-title>
 
       <v-card-text>
         <v-row>
           <v-col cols="12" md="6" align-self="center">
-            <v-carousel
-              v-if="spaceTypeDto.images && spaceTypeDto.images.length > 0"
-            >
+            <v-carousel v-if="spaceTypeDto.images && spaceTypeDto.images.length > 0">
               <v-carousel-item
                 v-for="item in spaceTypeDto.images"
                 :key="item.key"
                 :src="item.endpoint"
-              >
-                ></v-carousel-item
-              >
+              >></v-carousel-item>
             </v-carousel>
-            <v-img
-              v-else
-              :src="require('@/assets/images/common/default-image.jpg')"
-            ></v-img>
+            <v-img v-else :src="require('@/assets/images/common/default-image.jpg')"></v-img>
           </v-col>
           <v-col cols="12" md="6">
             <v-row justify="space-around">
@@ -42,7 +30,7 @@
               <v-col cols="6">
                 <v-text-field
                   v-model="spaceTypeDto.quantity"
-                  label="구좌수"
+                  label="타입 수"
                   outlined
                   hide-details
                   dense
@@ -93,14 +81,10 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <label for="">주방 시설 </label>
+                <label for>주방 시설</label>
 
-                <v-row no-gutters="" justify="start">
-                  <span
-                    v-for="item in kitchenFacilityList"
-                    :key="item.no"
-                    class="mx-1"
-                  >
+                <v-row no-gutters justify="start">
+                  <span v-for="item in kitchenFacilityList" :key="item.no" class="mx-1">
                     <v-checkbox
                       v-model="amenityArr"
                       :label="item.amenityName"
@@ -114,9 +98,7 @@
             </v-row>
           </v-col>
         </v-row>
-        <v-alert type="info" outlined dense
-          >주방시설 항목을 넣고 싶으면 나누다키친에 문의해주세요</v-alert
-        >
+        <v-alert type="info" outlined dense>주방시설 항목을 넣고 싶으면 나누다키친에 문의해주세요</v-alert>
         <div v-if="contractListCount" class="mt-4">
           <span class="text-h6">계약 리스트</span>
           <CommonTable
@@ -130,18 +112,14 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="grey darken-1" text @click="toggle()">
-          취소
-        </v-btn>
+        <v-btn color="grey darken-1" text @click="toggle()">취소</v-btn>
         <v-btn
           color="green darken-1"
           text
           @click="patch()"
           :loading="patchLoading"
           v-if="!readonly"
-        >
-          수정
-        </v-btn>
+        >수정</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

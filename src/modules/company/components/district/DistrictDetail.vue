@@ -167,7 +167,7 @@
                           월 관리비 : {{ item.monthlyUtilityFee }}만원
                         </li>
                         <li v-if="item.quantity && item.contracts.length">
-                          구좌 현황 :
+                          타입 현황 :
                           <b
                             :class="[
                               item.contracts.length > 0
