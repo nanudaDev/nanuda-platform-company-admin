@@ -15,14 +15,7 @@
             <h5 class="mb-0">최신 공지 사항</h5>
           </div>
           <div>
-            <v-btn
-              fab
-              depressed
-              small
-              color="grey"
-              dark
-              @click="$router.push('/notice-board')"
-            >
+            <v-btn fab depressed small color="grey" dark @click="$router.push('/notice-board')">
               <v-icon>mdi-arrow-right</v-icon>
             </v-btn>
           </div>
@@ -35,8 +28,7 @@
           @rowClicked="toSelectedNoticePage"
           @paginationChanged="getNoticeList()"
           :showPagination="false"
-        >
-        </CommonTable>
+        ></CommonTable>
       </v-col>
       <v-col cols="12" class="my-3">
         <v-row no-gutters justify="space-between" align="center" class="px-3">
@@ -44,14 +36,7 @@
             <h5 class="mb-0">최신 신청</h5>
           </div>
           <div>
-            <v-btn
-              fab
-              depressed
-              small
-              color="grey"
-              dark
-              @click="$router.push('/founder-consult')"
-            >
+            <v-btn fab depressed small color="grey" dark @click="$router.push('/founder-consult')">
               <v-icon>mdi-arrow-right</v-icon>
             </v-btn>
           </div>
@@ -116,7 +101,7 @@ export default class Dashboard extends Mixins(FounderConsultMixin) {
     //   align: 'center',
     // },
     {
-      text: 'no',
+      text: 'ID',
       value: 'no',
       align: 'center',
     },
