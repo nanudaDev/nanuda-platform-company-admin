@@ -21,7 +21,7 @@
               월세: {{ founderConsultDto.deliverySpaces.monthlyUtilityFee }}
             </li>
             <li>
-              구좌현황:
+              타입현황:
               {{
                 `${founderConsultDto.deliverySpaces.contracts.length}/${founderConsultDto.deliverySpaces.quantity}`
               }}
