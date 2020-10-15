@@ -11,14 +11,14 @@ export class SpaceTypeDto extends BaseDto<SpaceTypeDto> {
   typeName: string;
   adminNo: number;
   companyUserNo: number | string;
-  companyDistrictNo: string;
+  companyDistrictNo: number | string;
   buildingName: string;
   size: number;
   images: any[];
   quantity: number;
-  deposit: string;
-  monthlyUtilityFee: string;
-  monthlyRentFee: string;
+  deposit: number;
+  monthlyUtilityFee: number;
+  monthlyRentFee: number;
   showYn: YN;
   delYn: YN;
   companyDistrict: CompanyDistrictDto;
