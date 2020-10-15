@@ -9,21 +9,21 @@
           <ul class="u-list">
             <li>
               지점:
-              {{ founderConsultDto.deliverySpaces.companyDistrict.nameKr }}
+              {{ founderConsultDto.deliverySpace.companyDistrict.nameKr }}
             </li>
-            <li>타입: {{ founderConsultDto.deliverySpaces.typeName }}</li>
-            <li>평수: {{ founderConsultDto.deliverySpaces.size }}</li>
-            <li>보증금: {{ founderConsultDto.deliverySpaces.deposit }}</li>
+            <li>타입: {{ founderConsultDto.deliverySpace.typeName }}</li>
+            <li>평수: {{ founderConsultDto.deliverySpace.size }}</li>
+            <li>보증금: {{ founderConsultDto.deliverySpace.deposit }}</li>
             <li>
-              관리비: {{ founderConsultDto.deliverySpaces.monthlyUtilityFee }}
+              관리비: {{ founderConsultDto.deliverySpace.monthlyUtilityFee }}
             </li>
             <li>
-              월세: {{ founderConsultDto.deliverySpaces.monthlyUtilityFee }}
+              월세: {{ founderConsultDto.deliverySpace.monthlyUtilityFee }}
             </li>
             <li>
               타입현황:
               {{
-                `${founderConsultDto.deliverySpaces.contracts.length}/${founderConsultDto.deliverySpaces.quantity}`
+                `${founderConsultDto.deliverySpace.contracts.length}/${founderConsultDto.deliverySpace.quantity}`
               }}
             </li>
           </ul>

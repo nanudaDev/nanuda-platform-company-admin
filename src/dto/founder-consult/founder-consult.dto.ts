@@ -9,7 +9,7 @@ import { SpaceTypeDto } from '../company-district';
 
 export class FounderConsultDto extends BaseDto<FounderConsultDto> {
   deliverySpaceNo: number;
-  deliverySpaces: SpaceTypeDto;
+  deliverySpace: SpaceTypeDto;
   status: FOUNDER_CONSULT;
   hopeTime?: AVAILABLE_TIME;
   purposeYn: YN;

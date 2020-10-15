@@ -172,13 +172,13 @@ export default class FounderConsultDetail extends BaseComponent {
   private spaceTableHeader: any[] = [
     {
       text: '지점',
-      value: 'deliverySpaces.companyDistrict.nameKr',
+      value: 'deliverySpace.companyDistrict.nameKr',
       align: 'center',
       sortable: false,
     },
     {
       text: '타입',
-      value: 'deliverySpaces.typeName',
+      value: 'deliverySpace.typeName',
       align: 'center',
       sortable: false,
     },
