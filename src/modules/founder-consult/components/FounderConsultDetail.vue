@@ -108,6 +108,13 @@
         </CardWithTitle>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col>
+        <CardWithTitle title="비고">
+          {{ founderConsultDto.spaceConsultEtc }}
+        </CardWithTitle>
+      </v-col>
+    </v-row>
     <v-row justify="end" class="ma-5">
       <v-btn class="primary" @click="patchDetail()" v-if="!isContractComplete"
         >수정하기</v-btn
