@@ -95,6 +95,7 @@
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="reset()">Close</v-btn>
           <v-btn
+            :disabled="!isInputChanged"
             color="blue darken-1"
             text
             @click="requestChange()"
@@ -132,8 +133,19 @@ export default class CompanyChangeDialog extends BaseComponent {
   private loading = false;
   private logoChanged = false;
   private logo: FileAttachmentDto[] = [];
-
+  private originalCompanyDto = {};
   @Prop() readonly dialog: boolean;
+
+  get isInputChanged() {
+    // dto가 원래데이터와 다르면 true return else return false
+    if (
+      JSON.stringify(this.originalCompanyDto) == JSON.stringify(this.companyDto)
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   reset() {
     // this.userAddDialog = false;
@@ -147,6 +159,7 @@ export default class CompanyChangeDialog extends BaseComponent {
   getCompanyInfo() {
     companyService.findOne().subscribe(res => {
       this.companyDto = res.data;
+      this.originalCompanyDto = { ...this.companyDto };
     });
   }
 

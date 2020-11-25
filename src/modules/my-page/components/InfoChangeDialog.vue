@@ -37,6 +37,7 @@
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="reset()">Close</v-btn>
           <v-btn
+            :disabled="!isInputChanged"
             color="blue darken-1"
             text
             @click="requestChange()"
@@ -66,8 +67,20 @@ import ApprovalStatusChangeInfoText from '@/modules/_common/components/info-text
 export default class InfoChangeDialog extends BaseComponent {
   private companyUserDto = new CompanyUserDto(BaseUser);
   private loading = false;
-
+  private originalCompanyUserDto = {};
   @Prop() readonly dialog: boolean;
+
+  get isInputChanged() {
+    // dto가 원래데이터와 다르면 true return else return false
+    if (
+      JSON.stringify(this.originalCompanyUserDto) ==
+      JSON.stringify(this.companyUserDto)
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   reset() {
     // this.userAddDialog = false;
@@ -78,6 +91,7 @@ export default class InfoChangeDialog extends BaseComponent {
   getMyInfo() {
     companyUserService.findMe().subscribe(res => {
       this.companyUserDto = res.data;
+      this.originalCompanyUserDto = { ...this.companyUserDto };
     });
   }
   requestChange() {
@@ -87,7 +101,6 @@ export default class InfoChangeDialog extends BaseComponent {
         companyUserService.getTokenById().subscribe(res => {
           jwtStorageService.setToken(res.data.token);
           this.reset();
-
           this.$toasted.global.custom_success({
             message: '정보 변경 신청 성공!',
           });
