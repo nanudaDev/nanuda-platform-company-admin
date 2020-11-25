@@ -31,7 +31,7 @@
       <v-toolbar-items>
         <v-row align="center" no-gutters>
           <span class="d-block mx-5" v-if="$vuetify.breakpoint.mdAndUp"
-            >DARK MODE</span
+            >다크 모드</span
           >
           <v-switch
             @change="onThemeChanged()"
@@ -47,18 +47,13 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" text>
                   <v-icon>mdi-account-circle</v-icon>
-                  <span class="mx-2 text-uppercase">내정보</span>
+                  <span
+                    class="mx-2 text-uppercase"
+                    @click="$router.push('/mypage')"
+                    >내 정보</span
+                  >
                 </v-btn>
               </template>
-              <v-list>
-                <v-list-item
-                  v-for="(item, index) in profileDropDownList"
-                  :key="index"
-                  @click="$router.push(item.path)"
-                >
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-              </v-list>
             </v-menu>
           </v-row>
         </v-toolbar-items>
@@ -66,7 +61,7 @@
 
       <v-btn text @click="logout">
         <v-icon>mdi-logout</v-icon>
-        <span class="ml-2" v-if="$vuetify.breakpoint.mdAndUp">Logout</span>
+        <span class="ml-2" v-if="$vuetify.breakpoint.mdAndUp">로그아웃</span>
       </v-btn>
     </v-app-bar>
 
@@ -108,7 +103,6 @@ export default class MainLayout extends BaseComponent {
   private drawer = false;
   private mini = false;
   private routes: RouteConfig[] = routes;
-  private profileDropDownList = [{ title: '내 정보', path: '/mypage' }];
   private keepAliveList = [
     'FounderCounsultList',
     'Dashboard',

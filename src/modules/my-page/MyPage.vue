@@ -52,7 +52,6 @@
         </div>
         <div class="mt-4">
           <v-btn
-            color="secondary"
             outlined
             small
             @click="passwordChangeDialog = !passwordChangeDialog"
