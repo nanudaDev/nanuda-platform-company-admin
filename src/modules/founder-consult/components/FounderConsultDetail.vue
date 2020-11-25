@@ -111,7 +111,7 @@
     <v-row>
       <v-col>
         <CardWithTitle title="비고">
-          {{ founderConsultDto.spaceConsultEtc }}
+          {{ founderConsultDto.spaceConsultEtc || '내용 없음' }}
         </CardWithTitle>
       </v-col>
     </v-row>
