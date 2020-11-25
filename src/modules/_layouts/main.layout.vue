@@ -47,7 +47,7 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" text>
                   <v-icon>mdi-account-circle</v-icon>
-                  <span class="mx-2 text-uppercase">{{ myName }}</span>
+                  <span class="mx-2 text-uppercase">내정보</span>
                 </v-btn>
               </template>
               <v-list>
