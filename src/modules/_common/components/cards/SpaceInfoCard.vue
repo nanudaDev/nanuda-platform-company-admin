@@ -12,18 +12,21 @@
               {{ founderConsultDto.deliverySpace.companyDistrict.nameKr }}
             </li>
             <li>타입: {{ founderConsultDto.deliverySpace.typeName }}</li>
-            <li>평수: {{ founderConsultDto.deliverySpace.size }}</li>
-            <li>보증금: {{ founderConsultDto.deliverySpace.deposit }}</li>
-            <li>
-              관리비: {{ founderConsultDto.deliverySpace.monthlyUtilityFee }}
+            <li>평수: {{ founderConsultDto.deliverySpace.size }}평</li>
+            <li v-if="founderConsultDto.deliverySpace.deposit">
+              보증금: {{ founderConsultDto.deliverySpace.deposit }} 만원
             </li>
             <li>
-              월세: {{ founderConsultDto.deliverySpace.monthlyUtilityFee }}
+              관리비:
+              {{ founderConsultDto.deliverySpace.monthlyUtilityFee }} 만원
+            </li>
+            <li>
+              월세: {{ founderConsultDto.deliverySpace.monthlyUtilityFee }} 만원
             </li>
             <li>
               타입현황:
               {{
-                `${founderConsultDto.deliverySpace.contracts.length}/${founderConsultDto.deliverySpace.quantity}`
+                `${founderConsultDto.deliverySpace.remainingCount}/${founderConsultDto.deliverySpace.quantity}`
               }}
             </li>
           </ul>
