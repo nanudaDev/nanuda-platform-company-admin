@@ -2,7 +2,7 @@
   <div>
     <ConfirmDialog
       :dialog.sync="deleteDialog"
-      title="계약을 삭제하시겠습니까? 한번 삭제하면 다신 복구할수없습니다"
+      title="계약을 삭제하시겠습니까? 한번 삭제하면 다신 복구 할 수 없습니다"
       @confirm="deleteContract()"
     ></ConfirmDialog>
     <v-row>
