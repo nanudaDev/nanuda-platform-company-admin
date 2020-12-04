@@ -1,5 +1,6 @@
 import { BaseDto } from '@/core';
 import { APPROVAL_STATUS } from '@/services/shared';
+import { CompanyDistrictPromotionDto } from '../company-district-promotion';
 
 export class CompanyDistrictDto extends BaseDto<CompanyDistrictDto> {
   createdAt: Date;
@@ -15,5 +16,6 @@ export class CompanyDistrictDto extends BaseDto<CompanyDistrictDto> {
   lat: string;
   lon: string;
   companyDistrictStatus: APPROVAL_STATUS;
+  promotions?: CompanyDistrictPromotionDto[];
   vicinityInfo: object;
 }
