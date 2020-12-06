@@ -15,7 +15,14 @@
             <h5 class="mb-0">최신 공지 사항</h5>
           </div>
           <div>
-            <v-btn fab depressed small color="grey" dark @click="$router.push('/notice-board')">
+            <v-btn
+              fab
+              depressed
+              small
+              color="grey"
+              dark
+              @click="$router.push('/notice-board')"
+            >
               <v-icon>mdi-arrow-right</v-icon>
             </v-btn>
           </div>
@@ -36,7 +43,14 @@
             <h5 class="mb-0">최신 신청</h5>
           </div>
           <div>
-            <v-btn fab depressed small color="grey" dark @click="$router.push('/founder-consult')">
+            <v-btn
+              fab
+              depressed
+              small
+              color="grey"
+              dark
+              @click="$router.push('/founder-consult')"
+            >
               <v-icon>mdi-arrow-right</v-icon>
             </v-btn>
           </div>
@@ -112,12 +126,12 @@ export default class Dashboard extends Mixins(FounderConsultMixin) {
     },
     {
       text: '계약 수',
-      value: 'deliverySpaces.contracts.length',
+      value: 'deliverySpace.contracts.length',
       align: 'center',
     },
     {
       text: '타입 수',
-      value: 'deliverySpaces.quantity',
+      value: 'deliverySpace.quantity',
       align: 'center',
     },
     // {
@@ -132,12 +146,12 @@ export default class Dashboard extends Mixins(FounderConsultMixin) {
     },
     {
       text: '지점명',
-      value: 'deliverySpaces.companyDistrict.nameKr',
+      value: 'deliverySpace.companyDistrict.nameKr',
       align: 'center',
     },
     {
       text: '타입',
-      value: 'deliverySpaces.typeName',
+      value: 'deliverySpace.typeName',
       align: 'center',
     },
     {

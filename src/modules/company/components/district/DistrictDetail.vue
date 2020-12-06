@@ -67,6 +67,28 @@
                     )
                   }}
                 </li>
+                <li>
+                  진행중인 이벤트 :
+                  <ul
+                    v-if="
+                      companyDistrictDto.promotions &&
+                        companyDistrictDto.promotions.length > 0
+                    "
+                  >
+                    <li
+                      v-for="promotion in companyDistrictDto.promotions"
+                      :key="promotion.no"
+                    >
+                      {{ promotion.codeManagement.value }} ({{
+                        promotion.title
+                      }}) <br />
+                      기간:
+                      {{ $moment(promotion.started).format('YYYY.MM.DD') }} ~
+                      {{ $moment(promotion.ended).format('YYYY.MM.DD') }}
+                    </li>
+                  </ul>
+                  <span v-else>진행중인 이벤트 없음 </span>
+                </li>
               </ul>
             </v-col>
           </v-row>

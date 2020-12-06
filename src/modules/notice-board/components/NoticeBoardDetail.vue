@@ -1,21 +1,22 @@
 <template>
   <v-container v-if="noticeBoardDto">
     <v-card class="px-2">
-      <v-card-title class="display-1 text--primary justify-content-between align-items-end mb-4">
+      <v-card-title
+        class="display-1 text--primary justify-content-between align-items-end mb-4"
+      >
         <div>
           <v-chip
             color="orange"
             label
             small
-            class="notice-board-category mb-1"
-          >{{ noticeBoardDto.noticeBoardType | enumTransformer }}</v-chip>
+            class="notice-board-category mb-4"
+            >{{ noticeBoardDto.noticeBoardType | enumTransformer }}</v-chip
+          >
           <h3 class="notice-board-title">{{ noticeBoardDto.title }}</h3>
         </div>
         <div>
           <span class="notice-board-date caption">
-            {{
-            noticeBoardDto.createdAt | dateTransformer
-            }}
+            {{ noticeBoardDto.createdAt | dateTransformer }}
           </span>
         </div>
       </v-card-title>
@@ -25,15 +26,20 @@
           v-for="item in noticeBoardDto.attachments"
           :key="item.key"
           @click="downloadWithVueResource(item.endpoint, item.originFilename)"
-        >{{ item.originFilename }}</v-chip>
+          >{{ item.originFilename }}</v-chip
+        >
       </v-row>
 
       <v-card-text>
-        <div v-html="noticeBoardDto.content" style="min-height:300px;">{{ noticeBoardDto.content }}</div>
+        <div v-html="noticeBoardDto.content" style="min-height:300px;">
+          {{ noticeBoardDto.content }}
+        </div>
       </v-card-text>
     </v-card>
     <div class="text-right mt-4">
-      <v-btn color="secondary" @click="$router.push('/notice-board')">목록으로</v-btn>
+      <v-btn color="secondary" @click="$router.push('/notice-board')"
+        >목록으로</v-btn
+      >
     </div>
   </v-container>
 </template>
