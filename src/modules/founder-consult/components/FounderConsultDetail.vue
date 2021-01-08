@@ -115,6 +115,17 @@
         </CardWithTitle>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col>
+        <CardWithTitle
+          title="추가 정보"
+          v-for="item in founderConsultReplyDto.items"
+          :key="item.no"
+        >
+          {{ item.desc || '내용 없음' }}
+        </CardWithTitle>
+      </v-col>
+    </v-row>
     <v-row justify="end" class="ma-5">
       <v-btn class="primary" @click="patchDetail()" v-if="!isContractComplete"
         >수정하기</v-btn
@@ -129,6 +140,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator';
 import FounderConsultService from '@/services/founder-consult.service';
 import {
   FounderConsultDto,
+  FounderConsultReplyDto,
   CompanyFounderConsultFetchDto,
 } from '@/dto/founder-consult';
 import CardWithTitle from '@/modules/_common/components/CardWithTitle.vue';
@@ -150,6 +162,7 @@ import SpaceTypeDetailDialog from '@/modules/company/components/district/compone
 })
 export default class FounderConsultDetail extends BaseComponent {
   private founderConsultDto = new FounderConsultDto();
+  private founderConsultReplyDto = new FounderConsultReplyDto();
   private loading = false;
   private companyFounderConsultList: CodeManagementDto[] = [];
   private companyFounderFetchDto = new CompanyFounderConsultFetchDto();
@@ -220,7 +233,13 @@ export default class FounderConsultDetail extends BaseComponent {
       this.patchDetail();
     }
   }
-
+  getReply() {
+    FounderConsultService.findAllReply(this.$route.params.id).subscribe(res => {
+      if (res) {
+        this.founderConsultReplyDto = res.data;
+      }
+    });
+  }
   getCompanyFounderConsultList() {
     codeManagementService
       .findCompanyFounderConsultStatusList()
@@ -243,6 +262,7 @@ export default class FounderConsultDetail extends BaseComponent {
   }
   created() {
     this.getDetail();
+    this.getReply();
     this.getCompanyFounderConsultList();
   }
 }

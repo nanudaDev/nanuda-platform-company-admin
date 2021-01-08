@@ -3,7 +3,10 @@ import { FounderConsultSearchDto } from '@/dto/founder-consult/founder-consult-s
 import { FounderConsultDto } from '@/dto/founder-consult/founder-consult.dto';
 import { Observable } from 'rxjs';
 import { Pagination } from '@/common/interfaces/pagination.type';
-import { CompanyFounderConsultFetchDto } from '@/dto/founder-consult';
+import {
+  CompanyFounderConsultFetchDto,
+  FounderConsultReplyDto,
+} from '@/dto/founder-consult';
 
 class FounderConsultService extends BaseService {
   constructor() {
@@ -29,6 +32,16 @@ class FounderConsultService extends BaseService {
    */
   findOne(id: number | string) {
     return super.get<FounderConsultDto>(`delivery-founder-consult/${id}`);
+  }
+
+  /**
+   * replies
+   * @param id
+   */
+  findAllReply(id: number | string) {
+    return super.get<FounderConsultReplyDto>(
+      `delivery-founder-consult/${id}/delivery-founder-consult-reply`,
+    );
   }
 
   /**
