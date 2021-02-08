@@ -21,7 +21,7 @@
               {{ founderConsultDto.deliverySpace.monthlyUtilityFee }} 만원
             </li>
             <li>
-              월세: {{ founderConsultDto.deliverySpace.monthlyUtilityFee }} 만원
+              월세: {{ founderConsultDto.deliverySpace.monthlyRentFee }} 만원
             </li>
             <li>
               타입현황:
