@@ -8,6 +8,7 @@ import {
   SpaceTypeCreateDto,
   CompanyDistrictSearchDto,
 } from '@/dto/company-district';
+import { CompanyDistrictRevenueRecordDto } from '@/dto/company-district/company-district-revenue-record.dto';
 
 class companyDistrictService extends BaseService {
   constructor() {
@@ -57,6 +58,13 @@ class companyDistrictService extends BaseService {
   }
   findDistrictSelectList() {
     return super.get<CompanyDistrictDto[]>('company-district/select-option');
+  }
+  //지점별 매출 기록 리스트 가져오기
+  findDistrictRevenueRecords(id: string, year?: string) {
+    return super.get<CompanyDistrictRevenueRecordDto[]>(
+      `company-district/${id}/revenue-record`,
+      { year: year },
+    );
   }
 }
 export default new companyDistrictService();
