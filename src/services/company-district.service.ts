@@ -8,6 +8,9 @@ import {
   SpaceTypeCreateDto,
   CompanyDistrictSearchDto,
 } from '@/dto/company-district';
+import { CompanyDistrictRevenueRecordDto } from '@/dto/company-district/revenue-record/company-district-revenue-record.dto';
+import { CompanyDistrictRevenueRecordCreateDto } from '@/dto/company-district/revenue-record/company-district-revenue-record-create.dto';
+import { CompanyDistrictRevenueRecordPatchDto } from '@/dto/company-district/revenue-record';
 
 class companyDistrictService extends BaseService {
   constructor() {
@@ -57,6 +60,34 @@ class companyDistrictService extends BaseService {
   }
   findDistrictSelectList() {
     return super.get<CompanyDistrictDto[]>('company-district/select-option');
+  }
+
+  createDistrictRevenueRecords(
+    companyDistrictRevenueRecordCreateDto: CompanyDistrictRevenueRecordCreateDto,
+  ) {
+    return super.post<CompanyDistrictRevenueRecordCreateDto>(
+      'revenue-record',
+      companyDistrictRevenueRecordCreateDto,
+    );
+  }
+
+  //recordId를 가져와서 매출기록을 수정함
+  updateDistrictRevenueRecords(
+    recordId: number,
+    companyDistrictRevenueRecordPatchDto: CompanyDistrictRevenueRecordPatchDto,
+  ) {
+    return super.patch<CompanyDistrictRevenueRecordPatchDto>(
+      `revenue-record/${recordId}`,
+      companyDistrictRevenueRecordPatchDto,
+    );
+  }
+
+  //지점별 매출 기록 리스트 가져오기
+  findDistrictRevenueRecords(id: string, year?: string) {
+    return super.get<CompanyDistrictRevenueRecordDto[]>(
+      `company-district/${id}/revenue-record`,
+      { year: year },
+    );
   }
 }
 export default new companyDistrictService();
