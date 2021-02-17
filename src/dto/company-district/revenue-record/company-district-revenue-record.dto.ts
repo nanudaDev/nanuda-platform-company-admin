@@ -8,4 +8,5 @@ export class CompanyDistrictRevenueRecordDto extends BaseDto<
   maxRevenue: number;
   minRevenue: number;
   companyDistrictNo: number;
+  no: number;
 }

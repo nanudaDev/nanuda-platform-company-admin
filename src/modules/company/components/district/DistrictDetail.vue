@@ -256,7 +256,9 @@
           </v-data-iterator>
         </v-card-text>
       </CardWithTitle>
-      <RevenueRecordIterator />
+      <CardWithTitle title="매출 기록" :loading="revenueRecordLoading">
+        <RevenueRecordIterator @loading="onRevenueRecordLoadingChanged"
+      /></CardWithTitle>
     </div>
   </section>
 </template>
@@ -301,6 +303,7 @@ export default class DistrictDetail extends BaseComponent {
   private spaceTypeDetailDialog = false;
   private spaceTypeCreateDialog = false;
   private spaceTypeNo: number | string | string[] = null;
+  private revenueRecordLoading = false;
 
   get pageCount(): number {
     return Math.ceil(this.spaceTypeListCount / this.pagination.limit);
@@ -363,6 +366,9 @@ export default class DistrictDetail extends BaseComponent {
         // }
         this.getSpaceTypeList();
       });
+  }
+  onRevenueRecordLoadingChanged(event) {
+    this.revenueRecordLoading = event;
   }
   // 지도 가져오기
   setMap(district: CompanyDistrictDto) {
