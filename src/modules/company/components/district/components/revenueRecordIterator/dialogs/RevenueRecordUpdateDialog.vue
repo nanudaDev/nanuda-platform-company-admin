@@ -53,8 +53,8 @@ export default class RevenueRecordUpdateDialog extends BaseComponent {
 
   @Watch('dialog')
   onDialogChanged() {
-    this.revenueRecordPatchDto.minRevenue = this.minRevenue;
-    this.revenueRecordPatchDto.maxRevenue = this.maxRevenue;
+    this.$set(this.revenueRecordPatchDto, 'minRevenue', this.minRevenue);
+    this.$set(this.revenueRecordPatchDto, 'maxRevenue', this.maxRevenue);
   }
   toggle() {
     this.$emit('update:dialog', false);
@@ -64,6 +64,16 @@ export default class RevenueRecordUpdateDialog extends BaseComponent {
     this.revenueRecordPatchDto = new CompanyDistrictRevenueRecordPatchDto();
   }
   updateRevenueRecords() {
+    this.$set(
+      this.revenueRecordPatchDto,
+      'minRevenue',
+      this.revenueRecordPatchDto.minRevenue.toString().trim(),
+    );
+    this.$set(
+      this.revenueRecordPatchDto,
+      'maxRevenue',
+      this.revenueRecordPatchDto.maxRevenue.toString().trim(),
+    );
     companyDistrictService
       .updateDistrictRevenueRecords(this.recordNo, this.revenueRecordPatchDto)
       .subscribe(res => {
