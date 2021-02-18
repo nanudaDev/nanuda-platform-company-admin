@@ -62,6 +62,7 @@
     <v-pagination
       v-model="pagination.page"
       :length="pageCount"
+      :total-visible="7"
       v-if="showPagination"
       class="mt-2 pb-4"
     ></v-pagination>
