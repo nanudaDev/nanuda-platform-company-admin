@@ -108,6 +108,7 @@ import RevenueRecordCreateDialog from './dialogs/RevenueRecordCreateDialog.vue';
 import {
   CompanyDistrictRevenueRecordCreateDto,
   CompanyDistrictRevenueRecordDto,
+  CompanyDistrictRevenueRecordSearchDto,
 } from '@/dto/company-district/revenue-record';
 import RevenueRecordUpdateDialog from './dialogs/RevenueRecordUpdateDialog.vue';
 @Component({
@@ -116,7 +117,7 @@ import RevenueRecordUpdateDialog from './dialogs/RevenueRecordUpdateDialog.vue';
 })
 export default class RevenueRecordIterator extends BaseComponent {
   private revenueRecords: CompanyDistrictRevenueRecordDto[] = [];
-  private revenueCreateDto = new CompanyDistrictRevenueRecordCreateDto();
+
   private createDialog = false;
   private updateDialog = false;
   private currentYear: string = new Date().getFullYear().toString();
@@ -125,6 +126,8 @@ export default class RevenueRecordIterator extends BaseComponent {
   private selectedMax: number = null;
   private selectedMin: number = null;
   private selectedRecordNo: number = null;
+  private revenueCreateDto = new CompanyDistrictRevenueRecordCreateDto();
+  private revenueSearchDto = null;
   get months() {
     const arr = [];
     for (let i = 1; i < 13; i++) {
@@ -152,7 +155,7 @@ export default class RevenueRecordIterator extends BaseComponent {
   getRevenueRecords() {
     this.$emit('loading', true);
     companyDistrictService
-      .findDistrictRevenueRecords(this.$route.params.id, this.selectedYear)
+      .findDistrictRevenueRecords(this.revenueSearchDto)
       .subscribe(res => {
         this.revenueRecords = res.data;
         this.$emit('loading', false);
@@ -177,6 +180,7 @@ export default class RevenueRecordIterator extends BaseComponent {
   }
   @Watch('selectedYear')
   yearChanged() {
+    this.revenueSearchDto.year = this.selectedYear;
     this.getRevenueRecords();
   }
   recordCreated() {
@@ -187,7 +191,11 @@ export default class RevenueRecordIterator extends BaseComponent {
     this.updateDialog = false;
     this.getRevenueRecords();
   }
-  created() {
+  mounted() {
+    this.revenueSearchDto = new CompanyDistrictRevenueRecordSearchDto(
+      this.$route.params.id,
+      this.selectedYear,
+    );
     this.getRevenueRecords();
   }
 }

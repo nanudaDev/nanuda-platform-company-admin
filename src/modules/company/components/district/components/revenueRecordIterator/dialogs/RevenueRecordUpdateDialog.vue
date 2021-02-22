@@ -64,16 +64,20 @@ export default class RevenueRecordUpdateDialog extends BaseComponent {
     this.revenueRecordPatchDto = new CompanyDistrictRevenueRecordPatchDto();
   }
   updateRevenueRecords() {
-    this.$set(
-      this.revenueRecordPatchDto,
-      'minRevenue',
-      this.revenueRecordPatchDto.minRevenue.toString().trim(),
-    );
-    this.$set(
-      this.revenueRecordPatchDto,
-      'maxRevenue',
-      this.revenueRecordPatchDto.maxRevenue.toString().trim(),
-    );
+    if (this.revenueRecordPatchDto.minRevenue) {
+      this.$set(
+        this.revenueRecordPatchDto,
+        'minRevenue',
+        this.revenueRecordPatchDto.minRevenue.toString().trim(),
+      );
+    }
+    if (this.revenueRecordPatchDto.maxRevenue) {
+      this.$set(
+        this.revenueRecordPatchDto,
+        'maxRevenue',
+        this.revenueRecordPatchDto.maxRevenue.toString().trim(),
+      );
+    }
     companyDistrictService
       .updateDistrictRevenueRecords(this.recordNo, this.revenueRecordPatchDto)
       .subscribe(res => {

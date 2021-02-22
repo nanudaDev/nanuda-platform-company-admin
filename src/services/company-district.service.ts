@@ -9,8 +9,11 @@ import {
   CompanyDistrictSearchDto,
 } from '@/dto/company-district';
 import { CompanyDistrictRevenueRecordDto } from '@/dto/company-district/revenue-record/company-district-revenue-record.dto';
-import { CompanyDistrictRevenueRecordCreateDto } from '@/dto/company-district/revenue-record/company-district-revenue-record-create.dto';
-import { CompanyDistrictRevenueRecordPatchDto } from '@/dto/company-district/revenue-record';
+import {
+  CompanyDistrictRevenueRecordPatchDto,
+  CompanyDistrictRevenueRecordCreateDto,
+  CompanyDistrictRevenueRecordSearchDto,
+} from '@/dto/company-district/revenue-record';
 
 class companyDistrictService extends BaseService {
   constructor() {
@@ -83,10 +86,12 @@ class companyDistrictService extends BaseService {
   }
 
   //지점별 매출 기록 리스트 가져오기
-  findDistrictRevenueRecords(id: string, year?: string) {
+  findDistrictRevenueRecords(
+    companyDistrictRevenueRecordSearchDto: CompanyDistrictRevenueRecordSearchDto,
+  ) {
     return super.get<CompanyDistrictRevenueRecordDto[]>(
-      `company-district/${id}/revenue-record`,
-      { year: year },
+      'revenue-record',
+      companyDistrictRevenueRecordSearchDto,
     );
   }
 }

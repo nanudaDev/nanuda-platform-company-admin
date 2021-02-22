@@ -57,16 +57,20 @@ export default class RevenueRecordCreateDialog extends BaseComponent {
     this.revenueRecordCreateDto = new CompanyDistrictRevenueRecordCreateDto();
   }
   createRevenueRecords() {
-    this.$set(
-      this.revenueRecordCreateDto,
-      'minRevenue',
-      this.revenueRecordCreateDto.minRevenue.toString().trim(),
-    );
-    this.$set(
-      this.revenueRecordCreateDto,
-      'maxRevenue',
-      this.revenueRecordCreateDto.maxRevenue.toString().trim(),
-    );
+    if (this.revenueRecordCreateDto.minRevenue) {
+      this.$set(
+        this.revenueRecordCreateDto,
+        'minRevenue',
+        this.revenueRecordCreateDto.minRevenue.toString().trim(),
+      );
+    }
+    if (this.revenueRecordCreateDto.maxRevenue) {
+      this.$set(
+        this.revenueRecordCreateDto,
+        'maxRevenue',
+        this.revenueRecordCreateDto.maxRevenue.toString().trim(),
+      );
+    }
     this.revenueRecordCreateDto.companyDistrictNo = this.$route.params.id;
     this.revenueRecordCreateDto.year = this.selectedYear;
     this.revenueRecordCreateDto.month = this.selectedMonth;
