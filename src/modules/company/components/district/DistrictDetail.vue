@@ -256,6 +256,9 @@
           </v-data-iterator>
         </v-card-text>
       </CardWithTitle>
+      <CardWithTitle title="매출 기록" :loading="revenueRecordLoading">
+        <RevenueRecordIterator @loading="onRevenueRecordLoadingChanged"
+      /></CardWithTitle>
     </div>
   </section>
 </template>
@@ -277,6 +280,7 @@ import { Pagination } from '@/core';
 import { SpaceTypeDto } from '@/dto/company-district/space-type.dto';
 import { YN } from '@/services/shared';
 import { getColor } from '@/modules/_common/utils/getColor';
+import RevenueRecordIterator from './components/revenueRecordIterator/RevenueRecordIterator.vue';
 
 @Component({
   name: 'DistrictDetail',
@@ -284,6 +288,7 @@ import { getColor } from '@/modules/_common/utils/getColor';
     CardWithTitle,
     SpaceTypeDetailDialog,
     SpaceTypeCreateDialog,
+    RevenueRecordIterator,
   },
 })
 export default class DistrictDetail extends BaseComponent {
@@ -298,6 +303,8 @@ export default class DistrictDetail extends BaseComponent {
   private spaceTypeDetailDialog = false;
   private spaceTypeCreateDialog = false;
   private spaceTypeNo: number | string | string[] = null;
+  private revenueRecordLoading = false;
+
   get pageCount(): number {
     return Math.ceil(this.spaceTypeListCount / this.pagination.limit);
   }
@@ -332,6 +339,7 @@ export default class DistrictDetail extends BaseComponent {
         this.spaceTypeListCount = res.data.totalCount;
       });
   }
+
   formerPage() {
     if (this.pagination.page > 1) {
       this.pagination.page--;
@@ -358,6 +366,9 @@ export default class DistrictDetail extends BaseComponent {
         // }
         this.getSpaceTypeList();
       });
+  }
+  onRevenueRecordLoadingChanged(event) {
+    this.revenueRecordLoading = event;
   }
   // 지도 가져오기
   setMap(district: CompanyDistrictDto) {
